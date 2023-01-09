@@ -12,8 +12,8 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   headerContainer: {
-    paddingTop: Platform.OS === 'ios' ?RFPercentage(4):0,
-    marginBottom: Platform.OS === 'ios' ?RFPercentage(2):0,
+    paddingTop: Platform.OS === 'ios' ? RFPercentage(4) : 0,
+    marginBottom: Platform.OS === 'ios' ? RFPercentage(2) : 0,
     height: RFPercentage(7),
     backgroundColor: SCColors.primary,
     width: "100%",
@@ -62,7 +62,8 @@ export const styles = StyleSheet.create({
   },
   liveScroreContainer: {
     height: RFPercentage(25),
-    width: '48%',
+    width: flexW1 * 4.4,
+    marginRight: RFPercentage(1.5),
     borderRadius: RFPercentage(2), overflow: 'hidden',
     backgroundColor: SCColors.tabInactive
   },
@@ -244,5 +245,25 @@ export const styles = StyleSheet.create({
     height: RFPercentage(3),
     width: RFPercentage(3)
   },
+  matchTitleContainer: (position) => ({
+    position: "absolute",
+    bottom: position,
+    alignSelf: "center",
+    flexDirection: "row"
+  }),
 
+  matchText: (color, size) => ({
+    color: color,
+    fontSize: size ? size : RFPercentage(1.5),
+    fontWeight: "600"
+  }),
+  LoaderContainer: {
+    height: RFPercentage(20), width: RFPercentage(20),
+    alignSelf:'center',
+    justifyContent:"center",
+    alignItems:"center",
+    top:RFPercentage(40),
+    borderRadius:RFPercentage(2),
+    position: "absolute", zIndex: 2, backgroundColor: "rgba(0,0,0,0.8)"
+  }
 });

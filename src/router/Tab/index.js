@@ -19,7 +19,9 @@ const Stack = createStackNavigator();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator 
+    screenOptions={{ headerShown: false }}
+    >
       <Stack.Screen name="MyTabs" component={MyTabs} />
       <Stack.Screen name="VideoScreen" component={VideoScreen} />
       <Stack.Screen name="TrendingNews" component={TrendingNews} />

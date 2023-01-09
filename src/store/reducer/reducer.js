@@ -3,6 +3,10 @@ import ActionTypes from '../constant/constant';
 const INITIAL_STATE = {
     nowTv: [],
     thisWeek: [],
+    liveScore: [],
+    leagues: [],
+    standings: [],
+    loader: [],
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -16,6 +20,26 @@ export default (state = INITIAL_STATE, action) => {
             return ({
                 ...state,
                 thisWeek: action.payload
+            })
+        case ActionTypes.LIVESCORE:
+            return ({
+                ...state,
+                liveScore: action.payload
+            })
+        case ActionTypes.LEAGUES:
+            return ({
+                ...state,
+                leagues: action.payload
+            })
+        case ActionTypes.STANDINGS:
+            return ({
+                ...state,
+                standings: action.payload
+            })
+        case ActionTypes.LOADER:
+            return ({
+                ...state,
+                loader: action.payload
             })
         default:
             return state;

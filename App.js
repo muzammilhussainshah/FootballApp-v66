@@ -3,23 +3,25 @@ import React, { useState, useEffect } from 'react';
 // import { SafeAreaProvider } from 'react-native-safe-area-context';
 import {
   SafeAreaProvider,
-   
+
 } from 'react-native-safe-area-context';
 import Navigation from './src/router/Tab';
 import { PortalProvider } from '@gorhom/portal';
 import store from './src/store';
 
 import { Provider } from 'react-redux';
-import { StatusBar } from 'react-native';
+import { StatusBar, View } from 'react-native';
 function App() {
 
   return (
     <Provider store={store}>
       <StatusBar
-        hidden={true} 
-        />
+        hidden={true}
+      />
       <SafeAreaProvider>
         <PortalProvider>
+          {/* <View style={{ backgroundColor: 'red', flex: 1 }}></View> */}
+
           <Navigation />
         </PortalProvider>
       </SafeAreaProvider>

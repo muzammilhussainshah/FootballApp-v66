@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet  } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import Octicons from 'react-native-vector-icons/Octicons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
@@ -24,7 +24,7 @@ export default class BottomTabNavigator extends Component {
         initialRouteName="My Profile"
         screenOptions={{
           headerShown: false,
-         
+
         }}
         tabBarOptions={
           {
@@ -33,7 +33,9 @@ export default class BottomTabNavigator extends Component {
             showLabel: true,
             tabStyle: {
               backgroundColor: "rgb(45,45,45)",
-              paddingVertical: RFPercentage(0.5)
+              paddingVertical: RFPercentage(0.5),
+              paddingBottom: Platform.OS   == 'ios' ? RFPercentage(4.0) : RFPercentage(0.5),
+              height: Platform.OS   == 'ios' ? RFPercentage(10):RFPercentage(10),
             }
           }}
 
@@ -41,7 +43,7 @@ export default class BottomTabNavigator extends Component {
         <BottomTab.Screen
           name="Home"
           component={Home}
-          
+
           options={{
             tabBarIcon: ({ color, size }) => (
               <Octicons
@@ -102,7 +104,7 @@ export default class BottomTabNavigator extends Component {
       </BottomTab.Navigator>
     );
   }
- 
+
 }
 
 // const MyProfileScreenStack = createStackNavigator();
