@@ -42,12 +42,12 @@ const Home = ({ navigation }) => {
   const dispatch = useDispatch()
   const nowTv = useSelector((state) => state.root.nowTv);
   const thisWeek = useSelector((state) => state.root.thisWeek);
-  console.log(thisWeek,'thisWeekthisWeekthisWeek')
+  console.log(thisWeek, 'thisWeekthisWeekthisWeek')
   useEffect(() => {
     dispatch(NowTV())
     dispatch(ThisWeek())
   }, [])
-   return (
+  return (
     <>
       <View style={[styles.container,]}>
         <Header />
@@ -73,23 +73,12 @@ const Home = ({ navigation }) => {
                         {
                           index % 2 == 1 ?
                             <Image resizeMode='stretch' source={require('../../assets/bannerImg.jpeg')} style={{ height: "100%", width: "100%", marginLeft: '80%' }} />
-                            // img(require('../../assets/bannerImg2.jpeg'))
                             :
                             index % 2 == 0 ?
                               <Image resizeMode='stretch' source={require('../../assets/bannerImg2.jpeg')} style={{ height: "100%", width: "100%", marginLeft: '80%' }} />
-                              // img(require('../../assets/bannerImg.jpeg'))
                               :
                               <Image resizeMode='stretch' source={require('../../assets/bannerImg3.jpeg')} style={{ height: "100%", width: "100%", marginLeft: '80%' }} />
-                          // img(require('../../assets/bannerImg3.jpeg'))
                         }
-                        {/* <Image  resizeMode='stretch' source={require('../../assets/bannerImg.jpeg')} style={{ height: "100%", width: "100%",marginLeft:'80%' }} /> */}
-
-                        {/* <Text style={[styles.homeName('50%', 'flex-end', SCColors.gradientRight), {
-                        // transform: [{ skewX: "-15deg" }]
-
-                      }]}>
-                        {item?.teams?.home?.name}
-                      </Text> */}
                       </View>
 
                       <View style={[{ width: '100%', backgroundColor: 'red' },
@@ -140,7 +129,7 @@ const Home = ({ navigation }) => {
             <TitleBar title={`Match this Week`} seeAllEnable={true} />
 
             <View style={{ height: RFPercentage(26) }}>
-              <MatchPreviewCarousel />
+              <MatchPreviewCarousel data={thisWeek} thisWeek />
             </View>
             {/* MATCH THIS WEEK */}
 
@@ -195,14 +184,14 @@ const Home = ({ navigation }) => {
             <TitleBar title={`Match Highlight`} seeAllEnable={true} />
 
             <View style={{ height: RFPercentage(26) }}>
-              <MatchPreviewCarousel navigateTo={() => navigation?.navigate('VideoScreen')} />
+              <MatchPreviewCarousel data={DUMMYBANNERS} navigateTo={() => navigation?.navigate('VideoScreen')} />
             </View>
             {/* MATCH HIGHLIGHT */}
 
             {/* MATCH PREVIEW */}
             <TitleBar title={`Match Preview`} seeAllEnable={true} />
             <View style={{ height: RFPercentage(28) }}>
-              <MatchPreviewCarousel />
+              <MatchPreviewCarousel data={DUMMYBANNERS} />
             </View>
             {/* MATCH PREVIEW */}
 
@@ -213,14 +202,19 @@ const Home = ({ navigation }) => {
   );
 };
 
-const MatchPreviewCarousel = ({ navigateTo }) => {
+const MatchPreviewCarousel = ({ data, navigateTo,thisWeek }) => {
   return (
     <FlatList
       horizontal
       showsHorizontalScrollIndicator={false}
       contentContainerStyle={{ paddingHorizontal: RFPercentage(2), }}
-      data={DUMMYBANNERS}
-      renderItem={(item) => <CustomCarousel item={item} navigateTo={() => navigateTo && navigateTo()} />}
+      data={data}
+      renderItem={({item,index}) => {
+       console.log(item,'itemitemitemitem')
+        return(
+      // <></>
+      <CustomCarousel item={item} thisWeek={thisWeek}index={index} navigateTo={() => navigateTo && navigateTo()} />
+      )}}
       keyExtractor={item => item.id}
     />
   )

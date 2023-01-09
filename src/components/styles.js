@@ -244,5 +244,12 @@ export const styles = StyleSheet.create({
     height: RFPercentage(3),
     width: RFPercentage(3)
   },
-
+  matchTitleContainer:(position)=>({ position: "absolute",  bottom:position, alignSelf: "center", flexDirection: "row" }),
+matchText:(color,size)=>({
+  // backgroundColor:'rgba(0,0,0,0.5)',
+  // paddingHorizontal:RFPercentage(1),
+   color:color,
+   fontSize: size?size:RFPercentage(1.5),
+   fontWeight:"600"
+})
 });
