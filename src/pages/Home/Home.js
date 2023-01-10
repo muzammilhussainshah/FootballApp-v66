@@ -20,10 +20,11 @@ import ScoreCard from '../../components/ScoreCard';
 import CustomCarousel from '../../components/CustomCarousel';
 import { styles } from './styles'
 import { useDispatch, useSelector } from 'react-redux';
-import { NowTV, ThisWeek } from '../../store/action/action';
+import { LiveAll, NowTV, ThisWeek } from '../../store/action/action';
 import SCColors from '../../styles/SCColors';
 import moment from 'moment';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Loader from '../../components/Loader';
 
 const windowWidth = Dimensions.get('window').width;
 const flexW1 = windowWidth / 10
@@ -36,20 +37,29 @@ export const DUMMYBANNERS = [
 ];
 
 const Home = ({ navigation }) => {
-  const insets = useSafeAreaInsets();
 
   const carouselRef = useRef(null);
   const dispatch = useDispatch()
   const nowTv = useSelector((state) => state.root.nowTv);
   const thisWeek = useSelector((state) => state.root.thisWeek);
-  console.log(thisWeek, 'thisWeekthisWeekthisWeek')
+  const liveScore = useSelector((state) => state.root.liveScore);
+  const loader = useSelector((state) => state.root.loader);
+
   useEffect(() => {
     dispatch(NowTV())
     dispatch(ThisWeek())
+    dispatch(LiveAll())
   }, [])
+  
   return (
     <>
       <View style={[styles.container,]}>
+        {/* LOADER */}
+        {loader &&
+          <Loader />
+        }
+        {/* LOADER */}
+
         <Header />
         <View style={[styles.container,]}>
           <ScrollView >
@@ -134,10 +144,144 @@ const Home = ({ navigation }) => {
             {/* MATCH THIS WEEK */}
 
             {/* LIVE SCORES */}
-            <TitleBar title={`Live Scores`} seeAllEnable={true} />
+            {/* {liveScore.length > 0 ? */}
+            <>
+              <TitleBar title={`Live Scores`} seeAllEnable={true} />
 
-            <View style={styles.liveScroreMainContainer}>
-              <ScoreCard
+              <View style={styles.liveScroreMainContainer}>
+                {liveScore.length > 0 ?
+                  <FlatList
+                    data={liveScore}
+                    horizontal
+                    renderItem={({ item }) => {
+                      console.log(item, '.fixture.fixture.fixture.fixture ')
+
+                      // console.log(new Date(item.fixture.periods.first).getHours(), "4:59")
+
+
+                      // var x = item.fixture.periods.first
+                      // // var x2 = item.fixture.periods.second
+                      // var tempTime = moment.duration(x);
+                      // // var tempTime2 = moment.duration(x2);
+                      // var y = tempTime.hours() + tempTime.minutes();
+                      // console.log(
+                      //   // tempTime2.minutes()
+                      //   tempTime.hours() , tempTime.minutes()
+                      //   ,
+                      //   'tempTimetempTimetempTime', y) 
+                      return (
+                        <>
+                          <ScoreCard
+                            isLive={true}
+
+                            team1Logo={
+                              <Image
+                                source={{ uri: item.teams.home.logo }}
+                                style={{ height: RFPercentage(4), width: RFPercentage(4) }}
+                              />
+                            }
+                            leagueIcon={
+                              <Image
+                                source={{ uri: item.league.logo }}
+                                style={{ height: RFPercentage(2.5), width: RFPercentage(2.5) }}
+                              />
+                            }
+                            team2Logo={
+                              <Image
+                                source={{ uri: item.teams.away.logo }}
+                                style={{ height: RFPercentage(4), width: RFPercentage(4) }}
+                              />
+                            }
+                            team1Name={item.teams.home.name}
+                            team2Name={item.teams.away.name}
+                            matchDuration={item.fixture.status.elapsed + ` mins`}
+                            team1Score={item.goals.home}
+                            team2Score={item.goals.away} />
+
+                        </>
+                      )
+                    }}
+                    keyExtractor={item => item.id}
+                  />
+                  :
+                  <>
+                    <ScoreCard
+                      isLive={true}
+                      leagueIcon={
+                        <Ionicons name='logo-firefox' color="white" size={RFPercentage(2.5)} />
+                      }
+                      team1Logo={
+                        <Ionicons
+                          name='logo-firefox'
+                          color="white"
+                          size={RFPercentage(4)}
+                        />
+                      }
+                      team2Logo={
+                        <Ionicons
+                          name='logo-firefox'
+                          color="white"
+                          size={RFPercentage(4)}
+                        />
+                      }
+                      team1Name={`Leeds United`}
+                      team2Name={`Liverpool`}
+                      matchDuration={`83 mins`}
+                      team1Score={`0`}
+                      team2Score={2} />
+                    <ScoreCard
+                      isLive={true}
+                      leagueIcon={
+                        <Ionicons name='logo-firefox' color="white" size={RFPercentage(2.5)} />
+
+                      }
+                      team1Logo={
+                        <Ionicons
+                          name='logo-firefox'
+                          color="white"
+                          size={RFPercentage(4)}
+                        />}
+                      team2Logo={
+                        <Ionicons
+                          name='logo-firefox'
+                          color="white"
+                          size={RFPercentage(4)}
+                        />}
+                      team1Name={`Leeds United`}
+                      team2Name={`Liverpool`}
+                      matchDuration={`83 mins`}
+                      team1Score={`0`}
+                      team2Score={2} />
+                  </>
+                }
+                {/* {liveScore.map((item) => {
+                console.log(item.teams,
+                  'itemitemitem123321')
+                return (
+                  <ScoreCard
+                    isLive={true}
+                    team1Logo={
+                      <Ionicons
+                        name='logo-firefox'
+                        color="white"
+                        size={RFPercentage(4)}
+                      />
+                    }
+                    team2Logo={
+                      <Ionicons
+                        name='logo-firefox'
+                        color="white"
+                        size={RFPercentage(4)}
+                      />
+                    }
+                    team1Name={item.teams.home.name}
+                    team2Name={item.teams.away.name}
+                    matchDuration={`83 mins`}
+                    team1Score={`0`}
+                    team2Score={2} />
+                )
+              })} */}
+                {/* <ScoreCard
                 isLive={true}
                 team1Logo={
                   <Ionicons
@@ -176,8 +320,10 @@ const Home = ({ navigation }) => {
                 team2Name={`Liverpool`}
                 matchDuration={`83 mins`}
                 team1Score={`0`}
-                team2Score={2} />
-            </View>
+                team2Score={2} /> */}
+              </View>
+            </>
+
             {/* LIVE SCORES */}
 
             {/* MATCH HIGHLIGHT */}
@@ -202,19 +348,18 @@ const Home = ({ navigation }) => {
   );
 };
 
-const MatchPreviewCarousel = ({ data, navigateTo,thisWeek }) => {
+const MatchPreviewCarousel = ({ data, navigateTo, thisWeek }) => {
   return (
     <FlatList
       horizontal
       showsHorizontalScrollIndicator={false}
       contentContainerStyle={{ paddingHorizontal: RFPercentage(2), }}
       data={data}
-      renderItem={({item,index}) => {
-       console.log(item,'itemitemitemitem')
-        return(
-      // <></>
-      <CustomCarousel item={item} thisWeek={thisWeek}index={index} navigateTo={() => navigateTo && navigateTo()} />
-      )}}
+      renderItem={({ item, index }) => {
+        return (
+          <CustomCarousel item={item} thisWeek={thisWeek} index={index} navigateTo={() => navigateTo && navigateTo()} />
+        )
+      }}
       keyExtractor={item => item.id}
     />
   )

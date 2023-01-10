@@ -58,37 +58,54 @@ export const All = ({ navigation }) => {
         </>
     )
 }
-export const MatchPreviewCarouselWithContainer = ({ navigation }) => {
+export const MatchPreviewCarouselWithContainer = ({ navigation, data, preview }) => {
     return (
         <View style={{ height: RFPercentage(26) }}>
             <MatchPreviewCarousel
+                data={data}
+                preview={preview}
                 navigateTo={() => navigation?.navigate('VideoScreen')} />
         </View>
     )
 }
-export const Preview = ({ navigation }) => {
+export const Preview = ({ navigation, leagues }) => {
+    console.log(leagues, 'leagues leagues leagues leagues ')
     return (<>
         {/* MATCH HIGHLIGHT */}
+        {leagues.map((item) => {
+            return (
+                <>
+                    < TitleBar title={item.league.name} seeAllEnable={true} />
+                    <MatchPreviewCarouselWithContainer preview data={item.seasons} navigation={navigation} />
+                </>
+            )
+        })}
+        {/* < TitleBar title={`UEFA Champions League`} seeAllEnable={true} />
+        <MatchPreviewCarouselWithContainer navigation={navigation} />
         < TitleBar title={`UEFA Champions League`} seeAllEnable={true} />
-
         <MatchPreviewCarouselWithContainer navigation={navigation} />
-        <MatchPreviewCarouselWithContainer navigation={navigation} />
-        <MatchPreviewCarouselWithContainer navigation={navigation} />
+        < TitleBar title={`UEFA Champions League`} seeAllEnable={true} />
+        <MatchPreviewCarouselWithContainer navigation={navigation} /> */}
         {/* MATCH HIGHLIGHT                  : */}
     </>)
 }
-export const MatchPreviewCarousel = ({ footer, footerText, navigateTo }) => {
+export const MatchPreviewCarousel = ({ footer, footerText, navigateTo, data, preview }) => {
     return (
         <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{ paddingHorizontal: RFPercentage(2), }}
-            data={DUMMYBANNERS}
-            renderItem={(item) => (
-                <CustomCarousel
-                    navigateTo={() => navigateTo && navigateTo()}
-                    footer={footer == true ? true : false}
-                    footerText={footerText} item={item} />)}
+            data={data ? data : DUMMYBANNERS}
+            renderItem={({ item, index }) => {
+                // console.log(item, 'itemitemitem', index)
+                return (
+                    <CustomCarousel
+                        index={index}
+                        preview={preview}
+                        navigateTo={() => navigateTo && navigateTo()}
+                        footer={footer == true ? true : false}
+                        footerText={footerText} item={item} />)
+            }}
             keyExtractor={item => item.id}
         />
     )
@@ -121,45 +138,52 @@ export const NewsUpdate = ({ navigation }) => {
     )
 }
 
-const ColumnVal = ({ val }) => {
+const ColumnVal = ({ val, rank }) => {
     return (
         <View style={styles.columnValContainer}>
-            <Text style={styles.TeamText}>{val}</Text>
+            <Text style={styles.TeamText}>{rank && rank} {val}</Text>
         </View>
     )
 }
 
 const Title = ({ color }) => <View style={styles.titleSign(color)}></View>
 
-export const GoalScorerContainer = ({ position, rowVal }) => {
+export const GoalScorerContainer = ({ position, rowVal, index }) => {
+    console.log(rowVal, 'sadsaddsasadsaddsa')
+    const { all, goalsDiff, rank, points, team } = rowVal
     return (
         <View style={styles.goalScorerContainer(position)}>
             {position !== 'bottom' ?
                 <>
                     <View style={styles.teamContainer}>
                         {/* <Title /> */}
-                        {rowVal.title &&
+                        {/* {rowVal?.title && */}
+                        {index ?
                             <Title
-                                color={rowVal.title == "UEFA CHAMPION LEAGUE" ?
-                                    SCColors.lightGreen :
-                                    rowVal.title == "UEFA EUROPA LEAGUE" ?
-                                        SCColors.green :
-                                        SCColors.red} />}
-                        <ColumnVal val={rowVal.team} />
+                                color={
+                                    index == 1 ?
+                                        SCColors.lightGreen :
+                                        (index == 2 || index == 3 || index == 4) ?
+                                            SCColors.green :
+                                            null} />
+                            : <></>}
+                        {/* } */}
+                        <ColumnVal rank={rank} val={team.name} />
                     </View>
-                    <ColumnVal val={rowVal.p} />
-                    <ColumnVal val={rowVal.w} />
-                    <ColumnVal val={rowVal.d} />
-                    <ColumnVal val={rowVal.l} />
-                    <ColumnVal val={rowVal.gfga} />
-                    <ColumnVal val={rowVal.gd} />
-                    <ColumnVal val={rowVal.pts} />
+                    <ColumnVal val={all?.played} />
+                    <ColumnVal val={all?.win} />
+                    <ColumnVal val={all?.draw} />
+                    <ColumnVal val={all?.lose} />
+                    <ColumnVal val={all?.goals && all?.goals.for + '/' + all?.goals.against} />
+                    <ColumnVal val={goalsDiff} />
+                    <ColumnVal val={points} />
                 </> :
                 <>
                     <ColumnVal val={rowVal} />
-                </>}
+                </>
+            }
 
-        </View>
+        </View >
     )
 }
 const Keys = ({ title }) => {
@@ -171,13 +195,21 @@ const Keys = ({ title }) => {
     )
 }
 
-export const Standing = () => {
+export const Standing = ({ standings }) => {
+    let headerData = {
+        team: { name: 'Team' },
+        all: { played: 'p', win: 'w', draw: 'd', lose: 'l', goals: { for: 'GF', against: 'GA', } },
+        goalsDiff: 'GD',
+        points: 'PTS'
+    }
     return (
         <>
-            <TitleBar title={`Premier League`} downArrow={<Entypo name={`chevron-thin-down`} size={RFPercentage(2)} color={SCColors.white} />} />
+            <TitleBar title={standings[0]?.league?.name} downArrow={<Entypo name={`chevron-thin-down`} size={RFPercentage(2)} color={SCColors.white} />} />
 
-            {LEAGUEROWVAL.map((item, index) => <GoalScorerContainer position={index == 0 ? 'top' : 'mid'} rowVal={item} />)}
+            {/* {LEAGUEROWVAL.map((item, index) => <GoalScorerContainer position={index == 0 ? 'top' : 'mid'} rowVal={item} />)} */}
 
+            <GoalScorerContainer position={'top'} rowVal={headerData} />
+            {standings[0]?.league?.standings[0].map((item, index) => <GoalScorerContainer index={index} position={'mid'} rowVal={item} />)}
             <GoalScorerContainer position={'bottom'} rowVal={'See More'} />
 
             <Text style={[styles.TeamText, styles.keyText]}>{`key`}</Text>

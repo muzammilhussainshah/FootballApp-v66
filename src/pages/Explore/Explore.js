@@ -1,5 +1,5 @@
 // @app
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FlatList,
   ScrollView,
@@ -23,10 +23,21 @@ import {
   Preview,
   Standing
 } from './Components/Component';
+import { League, Standings } from '../../store/action/action';
+import { useDispatch, useSelector } from 'react-redux';
+import Loader from '../../components/Loader';
 
 const Explore = ({ navigation }) => {
   const [activeCategory, setActiveCategory] = useState('All')
+  const dispatch = useDispatch()
+  const leagues = useSelector((state) => state.root.leagues);
+  const standings = useSelector((state) => state.root.standings);
+  const loader = useSelector((state) => state.root.loader);
 
+  useEffect(() => {
+    dispatch(League())
+    dispatch(Standings())
+  }, [])
   const categoryButton = (item) => {
     return (
       <TouchableOpacity
@@ -40,6 +51,12 @@ const Explore = ({ navigation }) => {
   return (
     <>
       <View style={[styles.container,]}>
+        {/* LOADER */}
+        {loader &&
+          <Loader />
+        }
+        {/* LOADER */}
+
         {/* HEADER */}
         <Header />
         {/* HEADER */}
@@ -64,14 +81,14 @@ const Explore = ({ navigation }) => {
               <All navigation={navigation} />
               :
               (activeCategory == 'Preview' || activeCategory == 'Highlight') ?
-                <Preview navigation={navigation} />
+                <Preview navigation={navigation} leagues={leagues} />
                 :
                 (activeCategory == 'News Update') ?
                   <NewsUpdate navigation={navigation} />
 
                   :
                   (activeCategory == 'Standings') ?
-                    <Standing />
+                    <Standing standings={standings} />
 
                     : <></>}
             {/* SELECTED COMPONENT */}

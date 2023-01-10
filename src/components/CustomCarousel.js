@@ -13,8 +13,9 @@ import SCColors from '../styles/SCColors';
 // @components
 import { styles } from './styles'
 
-const CustomCarousel = ({ item, index, thisWeek, footer, footerText, navigateTo }) => {
+const CustomCarousel = ({ item, index, thisWeek, footer, footerText, navigateTo, preview }) => {
   // const { item, footer, footerText, navigateTo } = props
+  // console.log(index, 'indexindexindex')
   return (
     <>
       <TouchableOpacity
@@ -23,14 +24,40 @@ const CustomCarousel = ({ item, index, thisWeek, footer, footerText, navigateTo 
         style={[styles.carouselContainer(footer ? true : false), { overflow: "hidden", backgroundColor: 'red' }]}>
         <Image
           source={
-            index % 2 == 1 ?
-              require('../assets/thisWeekThumbnail2.jpeg')
-              :
-              index % 2 == 0 ?
-                require('../assets/thisWeekThumbnail.jpeg')
+            preview ?
+              index == 1 ?
+                require(`../assets/highlight1.jpeg`)
                 :
+                index == 2 ?
+                  require(`../assets/highlight2.jpeg`)
+                  :
+                  index == 3 ?
+                    require(`../assets/highlight3.jpeg`)
+                    :
+                    index == 4 ?
+                      require(`../assets/highlight4.jpeg`)
+                      :
+                      index == 5 ?
+                        require(`../assets/highlight5.jpeg`)
+                        :
+                        index == 6 ?
+                          require(`../assets/highlight6.jpeg`)
 
-                require('../assets/thisWeekThumbnail2.jpeg')
+                          :
+                          require(`../assets/download.jpeg`)
+              :
+
+              thisWeek ?
+                index % 2 == 1 ?
+                  require('../assets/thisWeekThumbnail2.jpeg')
+                  :
+                  index % 2 == 0 ?
+                    require('../assets/thisWeekThumbnail.jpeg')
+                    :
+
+                    require('../assets/thisWeekThumbnail2.jpeg') :
+                require('../assets/download.jpeg')
+
           }
           style={
             // styles.subCrousalBaner(footer ? true : false)
@@ -48,7 +75,7 @@ const CustomCarousel = ({ item, index, thisWeek, footer, footerText, navigateTo 
               <Text style={styles.matchText(SCColors.white)}>{item?.teams?.away?.name}</Text>
             </View>
             <View style={styles.matchTitleContainer('5%')}>
-              <Text style={styles.matchText(SCColors.white,RFPercentage(1.2))}>{moment(item.fixture.date).format('ddd, D MMM -HH:MM A ')}
+              <Text style={styles.matchText(SCColors.white, RFPercentage(1.2))}>{moment(item.fixture.date).format('ddd, D MMM -HH:MM A ')}
               </Text>
             </View>
           </>

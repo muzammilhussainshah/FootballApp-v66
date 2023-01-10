@@ -20,8 +20,12 @@ import {
   LIVEDATES,
   MATCHSTATUS
 } from './DummyData';
+import Loader from '../../components/Loader';
+import { useSelector } from 'react-redux';
 
 const Live = ({ navigation }) => {
+  const loader = useSelector((state) => state.root.loader);
+
   // STATE
   const [activeCategory, setActiveCategory] = useState('Today, 12 Sep')
   // STATE
@@ -51,6 +55,12 @@ const Live = ({ navigation }) => {
 
   return (
     <View style={[styles.container,]}>
+
+      {/* LOADER */}
+      {loader &&
+        <Loader />
+      }
+      {/* LOADER */}
 
       {/* HEADER */}
       < Header />

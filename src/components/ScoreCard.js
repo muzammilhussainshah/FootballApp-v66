@@ -17,12 +17,13 @@ const ScoreCard = ({ team1Logo,
   team2Name,
   team1Score,
   team2Score,
-  matchDuration
+  matchDuration,
+  leagueIcon
 }) => {
   return (
     <View style={styles.liveScroreContainer}>
       <View style={styles.ScoreHeaderContainer}>
-        <Ionicons name='logo-firefox' color="white" size={RFPercentage(2.5)} />
+        {leagueIcon}
         <View style={styles.liveIconContainer('small')}>
           <Text style={styles.liveText('small')}>{`LIVE`}</Text>
         </View>
