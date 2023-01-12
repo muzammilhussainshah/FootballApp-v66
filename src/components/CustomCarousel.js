@@ -13,38 +13,43 @@ import SCColors from '../styles/SCColors';
 // @components
 import { styles } from './styles'
 
-const CustomCarousel = ({ item, index, thisWeek, footer, footerText, navigateTo, preview }) => {
+const CustomCarousel = ({ item, index, thisWeek, footer, footerText, navigateTo, league, preview }) => {
   // const { item, footer, footerText, navigateTo } = props
-  // console.log(index, 'indexindexindex')
+  {
+    preview &&
+      console.log(league, 'indexindexindex')
+  }
   return (
     <>
       <TouchableOpacity
         onPress={() => navigateTo && navigateTo()}
         activeOpacity={.8}
-        style={[styles.carouselContainer(footer ? true : false), { overflow: "hidden", backgroundColor: 'red' }]}>
+        style={[styles.carouselContainer(footer ? true : false), { overflow: "hidden",  backgroundColor:SCColors.ScoreCart }]}>
         <Image
+        resizeMode='stretch'
           source={
             preview ?
-              index == 1 ?
-                require(`../assets/highlight1.jpeg`)
-                :
-                index == 2 ?
-                  require(`../assets/highlight2.jpeg`)
-                  :
-                  index == 3 ?
-                    require(`../assets/highlight3.jpeg`)
-                    :
-                    index == 4 ?
-                      require(`../assets/highlight4.jpeg`)
-                      :
-                      index == 5 ?
-                        require(`../assets/highlight5.jpeg`)
-                        :
-                        index == 6 ?
-                          require(`../assets/highlight6.jpeg`)
+              { uri: league?.logo }
+              // index == 1 ?
+              //   require(`../assets/highlight1.jpeg`)
+              //   :
+              //   index == 2 ?
+              //     require(`../assets/highlight2.jpeg`)
+              //     :
+              //     index == 3 ?
+              //       require(`../assets/highlight3.jpeg`)
+              //       :
+              //       index == 4 ?
+              //         require(`../assets/highlight4.jpeg`)
+              //         :
+              //         index == 5 ?
+              //           require(`../assets/highlight5.jpeg`)
+              //           :
+              //           index == 6 ?
+              //             require(`../assets/highlight6.jpeg`)
 
-                          :
-                          require(`../assets/download.jpeg`)
+              //             :
+              //             require(`../assets/download.jpeg`)
               :
 
               thisWeek ?

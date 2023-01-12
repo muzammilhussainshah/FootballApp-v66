@@ -23,7 +23,7 @@ import {
   Preview,
   Standing
 } from './Components/Component';
-import { League, Standings } from '../../store/action/action';
+import { League, LeagueBySession, Standings } from '../../store/action/action';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../../components/Loader';
 
@@ -36,6 +36,7 @@ const Explore = ({ navigation }) => {
 
   useEffect(() => {
     dispatch(League())
+    // dispatch(LeagueBySession())
     dispatch(Standings())
   }, [])
   const categoryButton = (item) => {

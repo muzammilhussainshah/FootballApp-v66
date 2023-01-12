@@ -75,7 +75,6 @@ const Home = ({ navigation }) => {
                 autoplayInterval={5000}
                 data={nowTv}
                 renderItem={({ item, index }) => {
-                  console.log(moment(item?.fixture?.date).format('ddd, D MMM -HH:MM A '), 'itemitemitem', item)
                   return (
                     <View style={[styles.crousalBaner, styles.crousalBaner2]}>
                       <View style={[{ width: '100%', backgroundColor: 'green', justifyContent: "center", alignItems: "center" },

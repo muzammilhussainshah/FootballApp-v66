@@ -58,25 +58,27 @@ export const All = ({ navigation }) => {
         </>
     )
 }
-export const MatchPreviewCarouselWithContainer = ({ navigation, data, preview }) => {
+export const MatchPreviewCarouselWithContainer = ({ navigation, data, preview, league }) => {
     return (
         <View style={{ height: RFPercentage(26) }}>
             <MatchPreviewCarousel
                 data={data}
                 preview={preview}
+                league={league}
                 navigateTo={() => navigation?.navigate('VideoScreen')} />
         </View>
     )
 }
 export const Preview = ({ navigation, leagues }) => {
-    console.log(leagues, 'leagues leagues leagues leagues ')
+    // console.log(leagues, 'leagues leagues leagues leagues ')
     return (<>
         {/* MATCH HIGHLIGHT */}
         {leagues.map((item) => {
+            console.log(item, 'leagues leagues leagues leagues ')
             return (
                 <>
                     < TitleBar title={item.league.name} seeAllEnable={true} />
-                    <MatchPreviewCarouselWithContainer preview data={item.seasons} navigation={navigation} />
+                    <MatchPreviewCarouselWithContainer preview data={item.seasons} league={item.league} navigation={navigation} />
                 </>
             )
         })}
@@ -89,7 +91,7 @@ export const Preview = ({ navigation, leagues }) => {
         {/* MATCH HIGHLIGHT                  : */}
     </>)
 }
-export const MatchPreviewCarousel = ({ footer, footerText, navigateTo, data, preview }) => {
+export const MatchPreviewCarousel = ({ footer, footerText, navigateTo, data,league, preview }) => {
     return (
         <FlatList
             horizontal
@@ -102,6 +104,7 @@ export const MatchPreviewCarousel = ({ footer, footerText, navigateTo, data, pre
                     <CustomCarousel
                         index={index}
                         preview={preview}
+                        league={league}
                         navigateTo={() => navigateTo && navigateTo()}
                         footer={footer == true ? true : false}
                         footerText={footerText} item={item} />)
