@@ -52,6 +52,7 @@ export const LiveAll = () => {
             dispatch({ type: ActionTypes.LOADER, payload: true });
             let resp = await getResponse(`https://api-football-v1.p.rapidapi.com/v3/fixtures?live=all`)
             if (resp.status == 200) {
+                console.log(resp,'LiveAll')
                 dispatch({ type: ActionTypes.LIVESCORE, payload: resp?.data?.response });
             } else {
                 alert('some thing went wrong')
@@ -121,8 +122,10 @@ const getResponse = async (URL) => {
             },
         };
         var resp = await axios(option);
+        console.log(resp,'errerrerrerr')
         return resp
     }
     catch (err) {
+        console.log(err,'errerrerrerr')
     }
 }

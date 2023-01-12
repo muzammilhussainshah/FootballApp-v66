@@ -15,11 +15,6 @@ import { styles } from './styles'
 
 const CustomCarousel = ({ item, index, thisWeek, footer, footerText, navigateTo, league, preview }) => {
   // const { item, footer, footerText, navigateTo } = props
-
-  {
-    thisWeek
-    && console.log(item, 'indexindexindex')
-  }
   return (
     <>
       <TouchableOpacity

@@ -59,6 +59,7 @@ const Home = ({ navigation }) => {
     dispatch(LiveAll())
   }, [])
 
+  const noDataMsg = (title) => <Text style={styles.noDataMsg}> {title}</Text>
   return (
     <>
       <View style={[styles.container,]}>
@@ -73,86 +74,93 @@ const Home = ({ navigation }) => {
           <ScrollView >
             {/* BANNERS */}
             <View style={styles.crousalContainer}>
-              <Carousel
-                ref={carouselRef}
-                layout={'default'}
-                scrollEnabled={false}
-                loop={true}
-                useNativeDriver
-                autoplay={true}
-                autoplayInterval={5000}
-                data={nowTv}
-                renderItem={({ item, index }) => {
-                  return (
-                    <View style={[styles.crousalBaner, styles.crousalBaner2]}>
-                      <View style={[{ width: '100%', backgroundColor: 'green', justifyContent: "center", alignItems: "center" },
-                      { transform: [{ skewX: "-15deg" }] }
-                      ]}>
-                        {
-                          index % 2 == 1 ?
-                            <Image resizeMode='stretch' source={require('../../assets/bannerImg.jpeg')} style={{ height: "100%", width: "100%", marginLeft: '80%' }} />
-                            :
-                            index % 2 == 0 ?
-                              <Image resizeMode='stretch' source={require('../../assets/bannerImg2.jpeg')} style={{ height: "100%", width: "100%", marginLeft: '80%' }} />
+              {nowTv.length > 0 ?
+                <Carousel
+                  ref={carouselRef}
+                  layout={'default'}
+                  scrollEnabled={false}
+                  loop={true}
+                  useNativeDriver
+                  autoplay={true}
+                  autoplayInterval={5000}
+                  data={nowTv}
+                  renderItem={({ item, index }) => {
+                    return (
+                      <View style={[styles.crousalBaner, styles.crousalBaner2]}>
+                        <View style={[styles.leftBannerContainer,
+                        { transform: [{ skewX: "-15deg" }] }
+                        ]}>
+                          {
+                            index % 2 == 1 ?
+                              <Image resizeMode='stretch' source={require('../../assets/bannerImg.jpeg')} style={{ height: "100%", width: "100%", marginLeft: '80%' }} />
                               :
-                              <Image resizeMode='stretch' source={require('../../assets/bannerImg3.jpeg')} style={{ height: "100%", width: "100%", marginLeft: '80%' }} />
-                        }
-                      </View>
+                              index % 2 == 0 ?
+                                <Image resizeMode='stretch' source={require('../../assets/bannerImg2.jpeg')} style={{ height: "100%", width: "100%", marginLeft: '80%' }} />
+                                :
+                                <Image resizeMode='stretch' source={require('../../assets/bannerImg3.jpeg')} style={{ height: "100%", width: "100%", marginLeft: '80%' }} />
+                          }
+                        </View>
 
-                      <View style={[{ width: '100%', backgroundColor: 'red' },
-                      { transform: [{ skewX: "-15deg" }] }
-
-                      ]}>
-                        {
-                          index % 2 == 1 ?
-                            <Image resizeMode='stretch' source={require('../../assets/bannerImg3.jpeg')} style={{ height: "100%", width: "70%", }} /> :
-                            index % 2 == 0 ?
-                              <Image resizeMode='stretch' source={require('../../assets/bannerImg3.jpeg')} style={{ height: "100%", width: "70%", }} />
-                              :
-                              <Image resizeMode='stretch' source={require('../../assets/bannerImg.jpeg')} style={{ height: "100%", width: "70%", }} />
-                        }
-                      </View>
-                      <Text style={[styles.homeName('40%', 'flex-end', SCColors.gradientRight, '5%'), {
-                        transform: [{ skewX: "-15deg" }],
-                        zIndex: 2,
-                        width: '45%'
-
-                      }]}>
-                        {item?.teams?.home?.name}
-                      </Text>
-                      <Text style={[styles.homeName('60%', 'flex-start', SCColors.green, '50%'), {
-                        transform: [{ skewX: "-15deg" }],
-                        zIndex: 2,
-
-                      }]}>
-                        {item?.teams?.away?.name}
-                      </Text>
-                      <Text style={[
-                        styles.homeName('85%', 'center', SCColors.white),
+                        <View style={[{ width: '100%', },
                         { transform: [{ skewX: "-15deg" }] }
 
-                      ]}>
-                        {moment(item?.fixture?.date).format('ddd, D MMM ') + new Date(item?.fixture?.date).toLocaleString("en-US", { hour: '2-digit', minute: '2-digit' })}
-                      </Text>
-                    </View>
-                  )
-                }}
-                sliderWidth={windowWidth}
-                itemWidth={flexW1 * 8}
-              />
+                        ]}>
+                          {
+                            index % 2 == 1 ?
+                              <Image resizeMode='stretch' source={require('../../assets/bannerImg3.jpeg')} style={{ height: "100%", width: "70%", }} /> :
+                              index % 2 == 0 ?
+                                <Image resizeMode='stretch' source={require('../../assets/bannerImg3.jpeg')} style={{ height: "100%", width: "70%", }} />
+                                :
+                                <Image resizeMode='stretch' source={require('../../assets/bannerImg.jpeg')} style={{ height: "100%", width: "70%", }} />
+                          }
+                        </View>
+                        <Text style={[styles.homeName('40%', 'flex-end', SCColors.gradientRight, '5%'), {
+                          transform: [{ skewX: "-15deg" }],
+                          zIndex: 2,
+                          width: '45%'
+
+                        }]}>
+                          {item?.teams?.home?.name}
+                        </Text>
+                        <Text style={[styles.homeName('60%', 'flex-start', SCColors.green, '50%'), {
+                          transform: [{ skewX: "-15deg" }],
+                          zIndex: 2,
+
+                        }]}>
+                          {item?.teams?.away?.name}
+                        </Text>
+                        <Text style={[
+                          styles.homeName('85%', 'center', SCColors.white),
+                          { transform: [{ skewX: "-15deg" }] }]}>
+                          {moment(item?.fixture?.date).format('ddd, D MMM ') + new Date(item?.fixture?.date).toLocaleString("en-US", { hour: '2-digit', minute: '2-digit' })}
+                        </Text>
+                      </View>
+
+                    )
+                  }}
+                  sliderWidth={windowWidth}
+                  itemWidth={flexW1 * 8}
+                />
+                :
+                noDataMsg(`No match this today`)
+              }
             </View>
             {/* BANNERS */}
 
             {/* MATCH THIS WEEK */}
             <TitleBar title={`Match this Week`} seeAllEnable={true} />
 
-            <View style={{ height: RFPercentage(26) }}>
-              <MatchPreviewCarousel data={thisWeek} thisWeek />
+            <View style={styles.matchThisWeekContainer}>
+              {thisWeek.length > 0 ?
+                <MatchPreviewCarousel data={thisWeek} thisWeek />
+                :
+                noDataMsg(`No match this week`)
+              }
+
             </View>
             {/* MATCH THIS WEEK */}
 
             {/* LIVE SCORES */}
-            {/* {liveScore.length > 0 ? */}
             <>
               <TitleBar title={`Live Scores`} seeAllEnable={true} />
 
@@ -162,21 +170,6 @@ const Home = ({ navigation }) => {
                     data={liveScore}
                     horizontal
                     renderItem={({ item }) => {
-                      console.log(item, '.fixture.fixture.fixture.fixture ')
-
-                      // console.log(new Date(item.fixture.periods.first).getHours(), "4:59")
-
-
-                      // var x = item.fixture.periods.first
-                      // // var x2 = item.fixture.periods.second
-                      // var tempTime = moment.duration(x);
-                      // // var tempTime2 = moment.duration(x2);
-                      // var y = tempTime.hours() + tempTime.minutes();
-                      // console.log(
-                      //   // tempTime2.minutes()
-                      //   tempTime.hours() , tempTime.minutes()
-                      //   ,
-                      //   'tempTimetempTimetempTime', y) 
                       return (
                         <>
                           <ScoreCard
@@ -212,141 +205,26 @@ const Home = ({ navigation }) => {
                     keyExtractor={item => item.id}
                   />
                   :
-                  <>
-                    <ScoreCard
-                      isLive={true}
-                      leagueIcon={
-                        <Ionicons name='logo-firefox' color="white" size={RFPercentage(2.5)} />
-                      }
-                      team1Logo={
-                        <Ionicons
-                          name='logo-firefox'
-                          color="white"
-                          size={RFPercentage(4)}
-                        />
-                      }
-                      team2Logo={
-                        <Ionicons
-                          name='logo-firefox'
-                          color="white"
-                          size={RFPercentage(4)}
-                        />
-                      }
-                      team1Name={`Leeds United`}
-                      team2Name={`Liverpool`}
-                      matchDuration={`83 mins`}
-                      team1Score={`0`}
-                      team2Score={2} />
-                    <ScoreCard
-                      isLive={true}
-                      leagueIcon={
-                        <Ionicons name='logo-firefox' color="white" size={RFPercentage(2.5)} />
-
-                      }
-                      team1Logo={
-                        <Ionicons
-                          name='logo-firefox'
-                          color="white"
-                          size={RFPercentage(4)}
-                        />}
-                      team2Logo={
-                        <Ionicons
-                          name='logo-firefox'
-                          color="white"
-                          size={RFPercentage(4)}
-                        />}
-                      team1Name={`Leeds United`}
-                      team2Name={`Liverpool`}
-                      matchDuration={`83 mins`}
-                      team1Score={`0`}
-                      team2Score={2} />
-                  </>
+                  noDataMsg(`No match this time`)
                 }
-                {/* {liveScore.map((item) => {
-                console.log(item.teams,
-                  'itemitemitem123321')
-                return (
-                  <ScoreCard
-                    isLive={true}
-                    team1Logo={
-                      <Ionicons
-                        name='logo-firefox'
-                        color="white"
-                        size={RFPercentage(4)}
-                      />
-                    }
-                    team2Logo={
-                      <Ionicons
-                        name='logo-firefox'
-                        color="white"
-                        size={RFPercentage(4)}
-                      />
-                    }
-                    team1Name={item.teams.home.name}
-                    team2Name={item.teams.away.name}
-                    matchDuration={`83 mins`}
-                    team1Score={`0`}
-                    team2Score={2} />
-                )
-              })} */}
-                {/* <ScoreCard
-                isLive={true}
-                team1Logo={
-                  <Ionicons
-                    name='logo-firefox'
-                    color="white"
-                    size={RFPercentage(4)}
-                  />
-                }
-                team2Logo={
-                  <Ionicons
-                    name='logo-firefox'
-                    color="white"
-                    size={RFPercentage(4)}
-                  />
-                }
-                team1Name={`Leeds United`}
-                team2Name={`Liverpool`}
-                matchDuration={`83 mins`}
-                team1Score={`0`}
-                team2Score={2} />
-              <ScoreCard
-                isLive={true}
-                team1Logo={
-                  <Ionicons
-                    name='logo-firefox'
-                    color="white"
-                    size={RFPercentage(4)}
-                  />}
-                team2Logo={
-                  <Ionicons
-                    name='logo-firefox'
-                    color="white"
-                    size={RFPercentage(4)}
-                  />}
-                team1Name={`Leeds United`}
-                team2Name={`Liverpool`}
-                matchDuration={`83 mins`}
-                team1Score={`0`}
-                team2Score={2} /> */}
               </View>
             </>
 
             {/* LIVE SCORES */}
 
             {/* MATCH HIGHLIGHT */}
-            <TitleBar title={`Match Highlight`} seeAllEnable={true} />
+            {/* <TitleBar title={`Match Highlight`} seeAllEnable={true} />
 
             <View style={{ height: RFPercentage(26) }}>
               <MatchPreviewCarousel data={DUMMYBANNERS} navigateTo={() => navigation?.navigate('VideoScreen')} />
-            </View>
+            </View> */}
             {/* MATCH HIGHLIGHT */}
 
             {/* MATCH PREVIEW */}
-            <TitleBar title={`Match Preview`} seeAllEnable={true} />
+            {/* <TitleBar title={`Match Preview`} seeAllEnable={true} />
             <View style={{ height: RFPercentage(28) }}>
               <MatchPreviewCarousel data={DUMMYBANNERS} />
-            </View>
+            </View> */}
             {/* MATCH PREVIEW */}
 
           </ScrollView>

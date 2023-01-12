@@ -6,7 +6,7 @@ const INITIAL_STATE = {
     liveScore: [],
     leagues: [],
     standings: [],
-    loader: [],
+    loader: false,
 }
 
 export default (state = INITIAL_STATE, action) => {

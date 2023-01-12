@@ -10,7 +10,8 @@ export const styles = StyleSheet.create({
   crousalContainer: {
     height: RFPercentage(28),
     marginVertical: RFPercentage(2.5),
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: "center"
   },
   subCrousalContainer: {
     backgroundColor: 'red', margin: 1,
@@ -25,7 +26,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center"
   },
   crousalBaner: {
-    height: Platform.OS === 'ios' ? RFPercentage(25):RFPercentage(28),
+    height: Platform.OS === 'ios' ? RFPercentage(25) : RFPercentage(28),
     borderRadius: RFPercentage(3),
   },
   liveScroreMainContainer: {
@@ -48,6 +49,23 @@ export const styles = StyleSheet.create({
     paddingVertical: RFPercentage(0),
     fontSize: RFPercentage(2),
     fontStyle: 'italic',
+  },
+  noDataMsg: {
+    fontSize: Platform.OS === 'ios' ? RFPercentage(2) : RFPercentage(2.3),
+    color: SCColors.tabActive,
+    fontWeight: '600',
+    width: "100%",
+    textAlign: "center",
+  },
+  matchThisWeekContainer: {
+    height: RFPercentage(26),
+    justifyContent: 'center'
+  },
+  leftBannerContainer: {
+    width: '100%',
+    backgroundColor: 'green',
+    justifyContent: "center",
+    alignItems: "center"
   }
 
 });
