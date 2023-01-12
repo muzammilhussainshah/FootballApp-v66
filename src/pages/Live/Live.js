@@ -25,10 +25,18 @@ import { useSelector } from 'react-redux';
 import moment from 'moment';
 
 const Live = ({ navigation }) => {
-  const loader = useSelector((state) => state.root.loader);
-
+  // STATE
   const [liveDates, setLiveDates] = useState('')
-  
+  const [teamIconsSt, setteamIconsSt] = useState([])
+  const [todaysMatch, settodaysMatch] = useState('')
+  const [activeCategory, setActiveCategory] = useState(moment(new Date()).format('dddd, D MMM'))
+  // STATE
+
+  const loader = useSelector((state) => state.root.loader);
+  const thisWeek = useSelector((state) => state.root.thisWeek);
+
+
+
   function LIVEDATES(current) {
     var week = new Array();
     for (var i = 0; i < 7; i++) {
@@ -37,14 +45,21 @@ const Live = ({ navigation }) => {
     }
     return week;
   }
-  
+
   useEffect(() => {
     setLiveDates(LIVEDATES(new Date()))
+    let teamIcons = []
+    thisWeek.map((item) => {
+      teamIcons.push(item.teams.home.logo)
+      teamIcons.push(item.teams.away.logo)
+    })
+    teamIcons = [...new Set(teamIcons)]
+    setteamIconsSt(teamIcons)
   }, [])
-  
-  // STATE
-  const [activeCategory, setActiveCategory] = useState(moment(new Date()).format('dddd, D MMM'))
-  // STATE
+  useEffect(() => {
+    let result = thisWeek.filter((val) => moment(val.fixture.date).format('dddd, D MMM') == activeCategory)
+    settodaysMatch(result)
+  }, [activeCategory])
 
   // LIVE DATES BUTTONS COMPONENT
   const categoryButton = (item) => {
@@ -98,7 +113,7 @@ const Live = ({ navigation }) => {
         <ScrollView >
           {/* LIVE TEAMS */}
           <FlatList
-            data={DUMMYBANNERS}
+            data={teamIconsSt}
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.liveTeamsContainer}
@@ -108,23 +123,27 @@ const Live = ({ navigation }) => {
           {/* LIVE TEAMS */}
           {/* TRENDING NEWS */}
           <FlatList
-            data={MATCHSTATUS}
+            data={todaysMatch}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{ padding: RFPercentage(2) }}
-            renderItem={(props) => (
-              <>
-                <TrendingNewsCard
-                  matchStatus
-                  navigateTo={() => navigation.navigate('MatchNews', { isLive: props?.item?.isLive == true ? true : false })}
-                  newDatalength={MATCHSTATUS.length} item={props} />
-              </>)}
+            renderItem={(props) => {
+              // console.log(props 'propspropsprops')
+              return (
+                <>
+                  <TrendingNewsCard
+                    matchStatus
+                    navigateTo={() => navigation.navigate('MatchNews', { isLive: props?.item?.isLive == true ? true : false })}
+                    newDatalength={todaysMatch?.length}
+                     item={props} />
+                </>)
+            }}
             keyExtractor={item => item.id}
           />
           {/* TRENDING NEWS */}
 
         </ScrollView>
       </View>
-    </View>
+    </View >
 
   );
 };

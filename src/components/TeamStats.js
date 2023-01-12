@@ -14,10 +14,10 @@ const TeamStats = (item, whichTeam) => {
     <View style={styles.team1Container}>
       <View style={styles.team1ProfileContainer}>
         <Image
-          source={{ uri: whichTeam == 1 ? item?.logo1 : item?.logo2 }}
+          source={{ uri: whichTeam == 1 ? item?.teams?.home?.logo : item?.teams?.away?.logo }}
           style={styles.teamLogo} />
       </View>
-      <Text style={styles.caregoryBtnText}>{whichTeam == 1 ? item?.name1 : item?.name2}</Text>
+      <Text style={styles.caregoryBtnText}>{whichTeam == 1 ? item?.teams?.home?.name : item?.teams?.away?.name}</Text>
     </View>
   )
 };

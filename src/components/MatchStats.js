@@ -15,6 +15,7 @@ import TeamStats from './TeamStats';
 import { styles } from './styles'
 
 const MatchStats = ({ item }) => {
+  console.log(item.item.fixture.date, 'itemitemitemitem')
   return (
     <>
       <View style={styles.matchStatusSubContainer}>
@@ -22,13 +23,23 @@ const MatchStats = ({ item }) => {
         {TeamStats(item.item, 2)}
       </View>
       <View style={styles.matchStatusSubContainer}>
-        {item.item.isLive ?
+        <View style={styles.liveMatchTimeContainer}>
+          <Text style={styles.liveText('medium')}>{moment(item.item.fixture.date).format('hh:mm A')}</Text>
+          <View style={styles.bellIconContainer}>
+            <Fontisto
+              name='bell'
+              size={RFPercentage(1.8)}
+              color={SCColors.white}
+            />
+          </View>
+        </View>
+        {/* {item.item.isLive ?
           <View style={styles.liveIconContainer('medium', 'right')}>
             <Text style={styles.liveText('medium')}>{`LIVE`}</Text>
           </View>
           : item.item.matchTime ?
             <View style={styles.liveMatchTimeContainer}>
-              <Text style={styles.liveText('medium')}>{moment(item.item?.matchTime).format('hh:mm A')}</Text>
+              <Text style={styles.liveText('medium')}>{moment(item.item.fixture.date).format('hh:mm A')}</Text>
               <View style={styles.bellIconContainer}>
                 <Fontisto
                   name='bell'
@@ -38,7 +49,7 @@ const MatchStats = ({ item }) => {
               </View>
             </View>
             : null
-        }
+        } */}
       </View>
     </>
   );

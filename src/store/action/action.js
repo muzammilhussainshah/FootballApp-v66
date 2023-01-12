@@ -4,11 +4,13 @@ import axios from "axios";
 import moment from "moment/moment";
 
 
-export const NowTV = () => {
+export const NowTV = (date) => {
     return async (dispatch) => {
         try {
             dispatch({ type: ActionTypes.LOADER, payload: true });
-            let resp = await getResponse(`https://api-football-v1.p.rapidapi.com/v3/fixtures?date=${moment().format('YYYY-MM-DD')}`)
+            var date = date ? date : new Date();
+            let resp = await getResponse(`https://api-football-v1.p.rapidapi.com/v3/fixtures?date=${moment(date).format('YYYY-MM-DD')}`)
+            console.log(resp, 'respresprespresp')
             if (resp.status == 200) {
                 dispatch({ type: ActionTypes.NOWTV, payload: resp?.data?.response.splice(0, 5) });
             } else {
@@ -27,10 +29,11 @@ export const ThisWeek = () => {
     return async (dispatch) => {
         try {
             dispatch({ type: ActionTypes.LOADER, payload: true });
-            var date = new Date();
-            date.setDate(date.getDate() + 7);
-            let resp = await getResponse(`https://api-football-v1.p.rapidapi.com/v3/fixtures?from=2022-12-10&to=2022-12-17&season=2022&league=1`)
+            var date = new Date(); 
+            date.setDate(date.getDate() + 7); 
+            let resp = await getResponse(`https://api-football-v1.p.rapidapi.com/v3/fixtures?from=${moment(new Date()).format('YYYY-MM-DD')}&to=${moment(date).format('YYYY-MM-DD')}&season=2022&league=325`)
             if (resp.status == 200) {
+                // console.log(resp, 'asddsadasdas')
                 dispatch({ type: ActionTypes.THISWEEK, payload: resp?.data?.response });
             } else {
                 alert('some thing went wrong')
@@ -49,6 +52,7 @@ export const LiveAll = () => {
             dispatch({ type: ActionTypes.LOADER, payload: true });
             let resp = await getResponse(`https://api-football-v1.p.rapidapi.com/v3/fixtures?live=all`)
             if (resp.status == 200) {
+                // console.log(resp,'LiveAllLiveAllLiveAllLiveAllLiveAll')
                 dispatch({ type: ActionTypes.LIVESCORE, payload: resp?.data?.response });
             } else {
                 alert('some thing went wrong')
