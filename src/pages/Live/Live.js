@@ -15,11 +15,6 @@ import { RFPercentage } from 'react-native-responsive-fontsize';
 import Header from '../../components/Header';
 import TrendingNewsCard from '../../components/TrendingNewsCard';
 import { styles } from './styles';
-import {
-  DUMMYBANNERS,
-  LIVEDATES,
-  MATCHSTATUS
-} from './DummyData';
 import Loader from '../../components/Loader';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
@@ -34,8 +29,6 @@ const Live = ({ navigation }) => {
 
   const loader = useSelector((state) => state.root.loader);
   const thisWeek = useSelector((state) => state.root.thisWeek);
-
-
 
   function LIVEDATES(current) {
     var week = new Array();
@@ -127,14 +120,13 @@ const Live = ({ navigation }) => {
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{ padding: RFPercentage(2) }}
             renderItem={(props) => {
-              // console.log(props 'propspropsprops')
               return (
                 <>
                   <TrendingNewsCard
                     matchStatus
                     navigateTo={() => navigation.navigate('MatchNews', { isLive: props?.item?.isLive == true ? true : false })}
                     newDatalength={todaysMatch?.length}
-                     item={props} />
+                    item={props} />
                 </>)
             }}
             keyExtractor={item => item.id}

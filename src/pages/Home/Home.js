@@ -50,7 +50,7 @@ const Home = ({ navigation }) => {
     dispatch(ThisWeek())
     dispatch(LiveAll())
   }, [])
-  
+
   return (
     <>
       <View style={[styles.container,]}>
@@ -75,6 +75,7 @@ const Home = ({ navigation }) => {
                 autoplayInterval={5000}
                 data={nowTv}
                 renderItem={({ item, index }) => {
+                  console.log(moment(item?.fixture?.date).format('ddd, D MMM -HH:MM A '), 'itemitemitem', item)
                   return (
                     <View style={[styles.crousalBaner, styles.crousalBaner2]}>
                       <View style={[{ width: '100%', backgroundColor: 'green', justifyContent: "center", alignItems: "center" },
@@ -124,7 +125,7 @@ const Home = ({ navigation }) => {
                         { transform: [{ skewX: "-15deg" }] }
 
                       ]}>
-                        {moment(item?.fixture?.date).format('ddd, D MMM -HH:MM A ')}
+                        {moment(item?.fixture?.date).format('ddd, D MMM ') + new Date(item?.fixture?.date).toLocaleString("en-US", { hour: '2-digit', minute: '2-digit' })}
                       </Text>
                     </View>
                   )

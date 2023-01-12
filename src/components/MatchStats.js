@@ -15,7 +15,6 @@ import TeamStats from './TeamStats';
 import { styles } from './styles'
 
 const MatchStats = ({ item }) => {
-  console.log(item.item.fixture.date, 'itemitemitemitem')
   return (
     <>
       <View style={styles.matchStatusSubContainer}>
