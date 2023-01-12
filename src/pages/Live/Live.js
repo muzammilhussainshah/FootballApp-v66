@@ -1,5 +1,5 @@
 // @app
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FlatList,
   Image,
@@ -22,12 +22,28 @@ import {
 } from './DummyData';
 import Loader from '../../components/Loader';
 import { useSelector } from 'react-redux';
+import moment from 'moment';
 
 const Live = ({ navigation }) => {
   const loader = useSelector((state) => state.root.loader);
 
+  const [liveDates, setLiveDates] = useState('')
+  
+  function LIVEDATES(current) {
+    var week = new Array();
+    for (var i = 0; i < 7; i++) {
+      week.push(moment(new Date(current)).format('dddd, D MMM'));
+      current.setDate(current.getDate() + 1);
+    }
+    return week;
+  }
+  
+  useEffect(() => {
+    setLiveDates(LIVEDATES(new Date()))
+  }, [])
+  
   // STATE
-  const [activeCategory, setActiveCategory] = useState('Today, 12 Sep')
+  const [activeCategory, setActiveCategory] = useState(moment(new Date()).format('dddd, D MMM'))
   // STATE
 
   // LIVE DATES BUTTONS COMPONENT
@@ -69,7 +85,7 @@ const Live = ({ navigation }) => {
       {/* LIVE DATES BUTTONS */}
       <View style={{ height: RFPercentage(6.5) }}>
         <FlatList
-          data={LIVEDATES}
+          data={liveDates}
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.liveDatesContainer}

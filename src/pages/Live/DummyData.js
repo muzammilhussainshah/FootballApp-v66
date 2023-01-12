@@ -1,4 +1,4 @@
-export const LIVEDATES = ['Today, 12 Sep', 'Mon, 13 Sep', 'Tue, 14 Sep', 'Wed, 15 Sep', 'Thur, 16 Sep']
+// export const LIVEDATES = ['Today, 12 Sep', 'Mon, 13 Sep', 'Tue, 14 Sep', 'Wed, 15 Sep', 'Thur, 16 Sep']
 
 export const DUMMYBANNERS = [
     "https://i.picsum.photos/id/524/700/500.jpg?hmac=PuAKCqRNlpa6_UJLeKABjXH9l3MFgsv-LHMm0bDfey4",
