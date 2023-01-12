@@ -30,10 +30,18 @@ const windowWidth = Dimensions.get('window').width;
 const flexW1 = windowWidth / 10
 
 export const DUMMYBANNERS = [
-  "https://i.picsum.photos/id/524/700/500.jpg?hmac=PuAKCqRNlpa6_UJLeKABjXH9l3MFgsv-LHMm0bDfey4",
-  "https://i.picsum.photos/id/193/700/500.jpg?hmac=q5QJ9ieureq_dXwwsUmh7ub2pN-V1arRrqpMV7czc9g",
-  "https://i.picsum.photos/id/971/700/500.jpg?hmac=kNTldtPvd24NEOfvd39iwsRBun4As0dYChiWQuyCFo4",
-  "https://i.picsum.photos/id/524/700/500.jpg?hmac=PuAKCqRNlpa6_UJLeKABjXH9l3MFgsv-LHMm0bDfey4",
+  ''
+  // "https://i.picsum.photos/id/524/700/500.jpg?hmac=PuAKCqRNlpa6_UJLeKABjXH9l3MFgsv-LHMm0bDfey4"
+  ,
+  ''
+  // "https://i.picsum.photos/id/193/700/500.jpg?hmac=q5QJ9ieureq_dXwwsUmh7ub2pN-V1arRrqpMV7czc9g"
+  ,
+  ''
+  // "https://i.picsum.photos/id/971/700/500.jpg?hmac=kNTldtPvd24NEOfvd39iwsRBun4As0dYChiWQuyCFo4"
+  ,
+  ''
+  // "https://i.picsum.photos/id/524/700/500.jpg?hmac=PuAKCqRNlpa6_UJLeKABjXH9l3MFgsv-LHMm0bDfey4"
+  ,
 ];
 
 const Home = ({ navigation }) => {
@@ -355,11 +363,7 @@ const MatchPreviewCarousel = ({ data, navigateTo, thisWeek }) => {
       showsHorizontalScrollIndicator={false}
       contentContainerStyle={{ paddingHorizontal: RFPercentage(2), }}
       data={data}
-      renderItem={({ item, index }) => {
-        return (
-          <CustomCarousel item={item} thisWeek={thisWeek} index={index} navigateTo={() => navigateTo && navigateTo()} />
-        )
-      }}
+      renderItem={({ item, index }) => <CustomCarousel item={item} thisWeek={thisWeek} index={index} navigateTo={() => navigateTo && navigateTo()} />}
       keyExtractor={item => item.id}
     />
   )
