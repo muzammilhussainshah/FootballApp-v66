@@ -20,8 +20,6 @@ function App() {
       />
       <SafeAreaProvider>
         <PortalProvider>
-          {/* <View style={{ backgroundColor: 'red', flex: 1 }}></View> */}
-
           <Navigation />
         </PortalProvider>
       </SafeAreaProvider>
