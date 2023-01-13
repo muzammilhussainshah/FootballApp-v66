@@ -26,9 +26,10 @@ import {
     VideoTitle
 } from '../../VideoScreen/Components/Components';
 
-const TrendingNews = ({ navigation }) => {
+const TrendingNews = ({ navigation, route }) => {
     const [text, onChangeText] = React.useState("Comment here");
-
+    const { data } = route.params
+    console.log(route.params, 'asdsda')
     return (<>
         <View style={{ flex: 1, }}>
             <ScrollView contentContainerStyle={{ backgroundColor: SCColors.primary, }}>
@@ -39,7 +40,7 @@ const TrendingNews = ({ navigation }) => {
                         navigation={navigation}
                         backButton
                         type={'image'}
-                        photoURL={"https://i.picsum.photos/id/193/700/500.jpg?hmac=q5QJ9ieureq_dXwwsUmh7ub2pN-V1arRrqpMV7czc9g"}
+                        photoURL={data?.urlToImage}
                     />
                 </View>
                 {/* VIDEO SECTION */}
@@ -47,8 +48,8 @@ const TrendingNews = ({ navigation }) => {
                 <View style={[styles.VideoBody, {}]}>
                     {/* VIDEO TITLE */}
                     <VideoTitle
-                        subTitle={moment().calendar()}
-                        title={`Real Madrid Are Still Confident In Signing Mbappe This Summer`} />
+                        subTitle={moment(data.publishedAt).calendar()}
+                        title={data?.title} />
                     {/* VIDEO TITLE */}
 
                     {/* VIDEO TABS */}

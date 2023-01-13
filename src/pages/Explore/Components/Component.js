@@ -38,7 +38,6 @@ export const Preview = ({ navigation, leagues }) => {
     return (<>
         {/* MATCH HIGHLIGHT */}
         {leagues.map((item) => {
-            console.log(item, 'leagues leagues leagues leagues ')
             return (
                 <>
                     < TitleBar title={item.league.name} seeAllEnable={true} />
@@ -99,7 +98,7 @@ export const NewsUpdate = ({ navigation, news }) => {
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{ padding: RFPercentage(2) }}
                 renderItem={(props) => <TrendingNewsCard
-                    navigateTo={() => navigation.navigate('TrendingNews')}
+                    navigateTo={() => navigation.navigate('TrendingNews', { data: props.item })}
                     newDatalength={NEWSDATA.length}
                     item={props} />}
                 keyExtractor={item => item.id}
@@ -120,7 +119,6 @@ const ColumnVal = ({ val, rank }) => {
 const Title = ({ color }) => <View style={styles.titleSign(color)}></View>
 
 export const GoalScorerContainer = ({ position, rowVal, index }) => {
-    console.log(rowVal, 'sadsaddsasadsaddsa')
     const { all, goalsDiff, rank, points, team } = rowVal
     return (
         <View style={styles.goalScorerContainer(position)}>

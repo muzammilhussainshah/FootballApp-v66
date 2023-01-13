@@ -52,6 +52,7 @@ const Explore = ({ navigation }) => {
     dispatch(Standings())
     dispatch(News())
   }, [])
+
   const categoryButton = (item) => {
     return (
       <TouchableOpacity
@@ -106,7 +107,6 @@ const Explore = ({ navigation }) => {
                   :
                   (activeCategory == 'Standings') ?
                     <Standing standings={standings} />
-
                     : <></>}
 
           </ScrollView>

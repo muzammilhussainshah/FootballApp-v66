@@ -14,8 +14,6 @@ import SCColors from '../styles/SCColors';
 import { styles } from './styles'
 
 const CustomCarousel = ({ item, index, thisWeek, footer, footerText, news, navigateTo, league, preview }) => {
-  // const { item, footer, footerText, navigateTo } = props
-  console.log(item, index, thisWeek, footer, footerText, news, navigateTo, league, preview, 'laskdjsdjakladjsk')
   return (
     <>
       <TouchableOpacity

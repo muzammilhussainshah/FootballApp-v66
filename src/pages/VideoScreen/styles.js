@@ -171,7 +171,6 @@ export const styles = StyleSheet.create({
     },
     pictureSection: {
         height: heightFlex1 * 3,
-        backgroundColor: 'blue',
         marginBottom: RFPercentage(2)
     },
     videoIcons: {
