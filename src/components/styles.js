@@ -84,13 +84,13 @@ export const styles = StyleSheet.create({
     paddingHorizontal: RFPercentage(1),
   },
   ScoreTeamNameContainer: {
-    flex: 1.5,
+    // flex: 1.5,
     backgroundColor: SCColors.ScoreCart,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
     paddingHorizontal: RFPercentage(1),
-  },
+   },
   ScoreContainer: {
     flex: 4,
     backgroundColor: SCColors.ScoreCart,
@@ -123,7 +123,8 @@ export const styles = StyleSheet.create({
   },
   TeamText: {
     color: SCColors.white,
-    fontSize: RFPercentage(1.6)
+    fontSize: RFPercentage(1.6),
+     width:'50%',textAlign:'center'
   },
   MinsText: {
     color: SCColors.white,
