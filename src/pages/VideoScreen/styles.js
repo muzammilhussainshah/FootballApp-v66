@@ -139,6 +139,7 @@ export const styles = StyleSheet.create({
         borderRadius: RFPercentage(1),
         marginLeft: RFPercentage(2),
         padding: 0,
+        paddingVertical: Platform.OS === 'ios' ? RFPercentage(1) : 0,
         paddingHorizontal: RFPercentage(2),
         color: SCColors.tabInactive
     },
@@ -219,5 +220,17 @@ export const styles = StyleSheet.create({
         position: 'absolute',
         bottom: RFPercentage(2),
         left: RFPercentage(4)
-    }
+    },
+
 });
+
+export const tagsStyles = {
+    body: {
+        color: SCColors.tabActive,
+        marginVertical: RFPercentage(2),
+        width: '95%',
+        lineHeight: RFPercentage(2.5),
+        fontSize: RFPercentage(1.8)
+    },
+
+};

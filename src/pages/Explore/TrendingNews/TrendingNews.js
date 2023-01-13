@@ -10,6 +10,7 @@ import {
     Text,
     TextInput,
     TouchableOpacity,
+    useWindowDimensions,
     View
 } from 'react-native';
 
@@ -17,9 +18,11 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Octicons from 'react-native-vector-icons/Octicons'
 import { RFPercentage } from 'react-native-responsive-fontsize';
+import RenderHtml from 'react-native-render-html';
+
 
 import SCColors from '../../../styles/SCColors';
-import { styles } from '../../VideoScreen/styles';
+import { styles, tagsStyles } from '../../VideoScreen/styles';
 import { TRENDINGNEWSDATA } from '../DummyData';
 import {
     VIDEOSECTION,
@@ -29,9 +32,13 @@ import {
 const TrendingNews = ({ navigation, route }) => {
     const [text, onChangeText] = React.useState("Comment here");
     const { data } = route.params
-    console.log(route.params, 'asdsda')
+    console.log(data, 'datadatadata')
+    const { width } = useWindowDimensions();
+    const source = {
+        html: data.description
+    };
     return (<>
-        <View style={{ flex: 1, }}>
+        <View style={{ flex: 1, backgroundColor: SCColors.primary, }}>
             <ScrollView contentContainerStyle={{ backgroundColor: SCColors.primary, }}>
                 {/* VIDEO SECTION */}
                 <View style={styles.pictureSection}>
@@ -76,14 +83,13 @@ const TrendingNews = ({ navigation, route }) => {
 
                     </View>
                     {/* VIDEO TABS */}
-                    <View style={{ flex: 7 }}>
-                        <FlatList
-                            data={TRENDINGNEWSDATA}
-                            showsVerticalScrollIndicator={false}
-                            contentContainerStyle={styles.newsContainer}
-                            renderItem={({ item }) => <Text style={styles.newsText}>{item}</Text>}
-                            keyExtractor={item => item.id}
-                        />
+                    <View style={{ flex: 7, }}>
+                            <RenderHtml
+                                contentWidth={width}
+                                source={source}
+                                    tagsStyles={tagsStyles}
+
+                            /> 
                     </View>
                 </View>
             </ScrollView>
