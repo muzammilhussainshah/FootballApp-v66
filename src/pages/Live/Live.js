@@ -18,6 +18,7 @@ import { styles } from './styles';
 import Loader from '../../components/Loader';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
+import SCColors from '../../styles/SCColors';
 
 const Live = ({ navigation }) => {
   // STATE
@@ -66,12 +67,39 @@ const Live = ({ navigation }) => {
   }
   // LIVE DATES BUTTONS COMPONENT
 
+
+  const getImg = (index) => {
+    return (
+      index == 0 ? { uri: 'https://www.shareicon.net/data/2015/09/11/99462_sport_512x512.png' } :
+        index == 1 ? { uri: `https://static.thenounproject.com/png/2278735-200.png` }
+          :
+          index == 2 ? { uri: `https://cdn0.iconfinder.com/data/icons/soccer-training/512/N_T_1264Artboard_1_copy_11-512.png` }
+            :
+            index == 3 ? { uri: `https://static.thenounproject.com/png/761174-200.png` }
+              :
+              index == 4 ? { uri: 'https://cdn.iconscout.com/icon/premium/png-256-thumb/football-league-1424464-1204697.png' }
+                :
+                index == 5 ? { uri: 'https://www.shareicon.net/data/2015/09/11/99462_sport_512x512.png' } :
+                  index % 2 == 0 ?
+                    { uri: 'https://cdn-icons-png.flaticon.com/512/2629/2629318.png' }
+                    :
+                    { uri: 'https://upload.wikimedia.org/wikipedia/commons/4/48/Premier_league_trophy_icon_%28adjusted%29.png' }
+    )
+  }
+
   // LIVE TEAMS COMPONENTS
-  const teamIcons = (item) => {
+  const teamIcons = (item, index) => {
     return (
       <TouchableOpacity
         style={styles.teamIconsContainer(activeCategory == item ? true : false)}>
-        <Image source={{ uri: item }} style={styles.crousalBaner} />
+        <Image source={getImg(index)
+
+
+          // { uri: item }
+        }
+          style={[styles.crousalBaner,{tintColor:SCColors.tabActive}]}
+          
+        />
       </TouchableOpacity>
     )
   }
@@ -110,7 +138,7 @@ const Live = ({ navigation }) => {
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.liveTeamsContainer}
-            renderItem={({ item }) => teamIcons(item)}
+            renderItem={({ item, index }) => teamIcons(item, index)}
             keyExtractor={item => item.id}
           />
           {/* LIVE TEAMS */}
@@ -124,7 +152,7 @@ const Live = ({ navigation }) => {
                 <>
                   <TrendingNewsCard
                     matchStatus
-                    navigateTo={() => navigation.navigate('MatchNews', { isLive: props?.item?.isLive == true ? true : false })}
+                    // navigateTo={() => navigation.navigate('MatchNews', { isLive: props?.item?.isLive == true ? true : false })}
                     newDatalength={todaysMatch?.length}
                     item={props} />
                 </>)

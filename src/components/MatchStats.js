@@ -18,8 +18,8 @@ const MatchStats = ({ item }) => {
   return (
     <>
       <View style={styles.matchStatusSubContainer}>
-        {TeamStats(item.item, 1)}
-        {TeamStats(item.item, 2)}
+        {TeamStats(item.item, 1, item.index)}
+        {TeamStats(item.item, 2, item.index)}
       </View>
       <View style={styles.matchStatusSubContainer}>
         <View style={styles.liveMatchTimeContainer}>
