@@ -92,9 +92,10 @@ const Explore = ({ navigation }) => {
                     <Standing standings={standings} />
 
                     : <></>}
-            {/* SELECTED COMPONENT */}
+
           </ScrollView>
         </View >
+        {/* SELECTED COMPONENT */}
       </View>
     </>
   );

@@ -1,4 +1,4 @@
-export const EXPLORECATEGORY = ['All', 'Preview', 'Highlight', 'News Update', 'Standings']
+export const EXPLORECATEGORY = ['All', 'Preview',  'News Update', 'Standings']
 
 export const NEWSDATA = [{
     title: "Real Madrid Are Still Confident In Signing Mbappe This Summer",
