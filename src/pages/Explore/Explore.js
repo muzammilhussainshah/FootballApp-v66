@@ -1,5 +1,8 @@
 // @app
-import React, { useEffect, useState } from 'react';
+import React, {
+  useEffect,
+  useState
+} from 'react';
 import {
   FlatList,
   ScrollView,
@@ -9,27 +12,36 @@ import {
 } from 'react-native';
 
 import { RFPercentage } from 'react-native-responsive-fontsize';
+import {
+  useDispatch,
+  useSelector
+} from 'react-redux';
 
 // @components
 import Header from '../../components/Header';
 import SCColors from '../../styles/SCColors';
+import Loader from '../../components/Loader';
+
 import { styles } from './styles';
 import {
   EXPLORECATEGORY
 } from './DummyData';
 import {
-  All,
   NewsUpdate,
   Preview,
   Standing
 } from './Components/Component';
-import { League, LeagueBySession, News, Standings } from '../../store/action/action';
-import { useDispatch, useSelector } from 'react-redux';
-import Loader from '../../components/Loader';
+import {
+  League,
+  News,
+  Standings
+} from '../../store/action/action';
 
 const Explore = ({ navigation }) => {
   const [activeCategory, setActiveCategory] = useState('All')
+
   const dispatch = useDispatch()
+
   const leagues = useSelector((state) => state.root.leagues);
   const standings = useSelector((state) => state.root.standings);
   const loader = useSelector((state) => state.root.loader);
@@ -37,7 +49,6 @@ const Explore = ({ navigation }) => {
 
   useEffect(() => {
     dispatch(League())
-    // dispatch(LeagueBySession())
     dispatch(Standings())
     dispatch(News())
   }, [])
@@ -81,13 +92,17 @@ const Explore = ({ navigation }) => {
         <View style={[styles.container,]}>
           <ScrollView >
             {activeCategory == 'All' ?
-              <All navigation={navigation} news={news}/>
+              <>
+                <NewsUpdate navigation={navigation} news={news} />
+                <Preview navigation={navigation} leagues={leagues} />
+                <Standing standings={standings} />
+              </>
               :
               (activeCategory == 'Preview' || activeCategory == 'Highlight') ?
                 <Preview navigation={navigation} leagues={leagues} />
                 :
                 (activeCategory == 'News Update') ?
-                  <NewsUpdate navigation={navigation} news={news}/>
+                  <NewsUpdate navigation={navigation} news={news} />
                   :
                   (activeCategory == 'Standings') ?
                     <Standing standings={standings} />

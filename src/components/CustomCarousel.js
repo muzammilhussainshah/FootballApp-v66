@@ -32,48 +32,11 @@ const CustomCarousel = ({ item, index, thisWeek, footer, footerText, news, navig
               { uri: item?.urlToImage }
               :
               preview ?
-                { uri: league?.logo }
-                // index == 1 ?
-                //   require(`../assets/highlight1.jpeg`)
-                //   :
-                //   index == 2 ?
-                //     require(`../assets/highlight2.jpeg`)
-                //     :
-                //     index == 3 ?
-                //       require(`../assets/highlight3.jpeg`)
-                //       :
-                //       index == 4 ?
-                //         require(`../assets/highlight4.jpeg`)
-                //         :
-                //         index == 5 ?
-                //           require(`../assets/highlight5.jpeg`)
-                //           :
-                //           index == 6 ?
-                //             require(`../assets/highlight6.jpeg`)
+                { uri: league?.logo } :
 
-                //             :
-                //             require(`../assets/download.jpeg`)
-                :
-
-                // thisWeek ?
-                //  { uri: item&&item } 
-                // require('')
                 null
-            // require('../assets/download.jpeg')
-            //  :
-            // index % 2 == 1 ?
-            // require('../assets/thisWeekThumbnail2.jpeg')
-            // :
-            // index % 2 == 0 ?
-            // require('../assets/thisWeekThumbnail.jpeg')
-            // :
-
-            // require('../assets/thisWeekThumbnail2.jpeg') :
-
           }
           style={
-            // styles.subCrousalBaner(footer ? true : false)
-
             {
               height:
                 news ?

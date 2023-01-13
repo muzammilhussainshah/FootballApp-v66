@@ -22,42 +22,6 @@ import {
     NEWSDATA
 } from '../DummyData';
 
-export const All = ({ navigation ,news}) => {
-    return (
-        <>
-            {/* BANNERS */}
-            < View style={styles.bannerContainer}>
-                <MatchPreviewCarousel
-                    footer={true}
-                    footerText={`Player, Manager & Goal of the Month Premier League Awards?`} />
-            </View>
-            {/* BANNERS */}
-
-            {/* MATCH HIGHLIGHT */}
-            <TitleBar title={`Match Highlight`} seeAllEnable={true} />
-
-            <View style={{ height: RFPercentage(26) }}>
-                <MatchPreviewCarousel
-                    navigateTo={() => navigation?.navigate('VideoScreen')} />
-            </View>
-            {/* MATCH HIGHLIGHT */}
-
-            {/* TRENDING NEWS */}
-            <TitleBar title={`Trending News`} seeAllEnable={true} />
-            <FlatList
-                data={news}
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={{ padding: RFPercentage(2) }}
-                renderItem={(props) => <TrendingNewsCard
-                    navigateTo={() => navigation.navigate('TrendingNews')}
-                    newDatalength={NEWSDATA.length}
-                    item={props} />}
-                keyExtractor={item => item.id}
-            />
-            {/* TRENDING NEWS */}
-        </>
-    )
-}
 export const MatchPreviewCarouselWithContainer = ({ navigation, data, preview, league }) => {
     return (
         <View style={{ height: RFPercentage(26) }}>
@@ -91,7 +55,7 @@ export const Preview = ({ navigation, leagues }) => {
         {/* MATCH HIGHLIGHT                  : */}
     </>)
 }
-export const MatchPreviewCarousel = ({ footer, footerText, navigateTo, data,news, league, preview }) => {
+export const MatchPreviewCarousel = ({ footer, footerText, navigateTo, data, news, league, preview }) => {
     return (
         <FlatList
             horizontal
@@ -116,7 +80,7 @@ export const MatchPreviewCarousel = ({ footer, footerText, navigateTo, data,news
 }
 
 export const NewsUpdate = ({ navigation, news }) => {
-    console.log(news,'newsnewsnews')
+    console.log(news, 'newsnewsnews')
     return (
         <>
             {/* BANNERS */}
