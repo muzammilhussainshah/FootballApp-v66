@@ -23,7 +23,7 @@ import {
   Preview,
   Standing
 } from './Components/Component';
-import { League, LeagueBySession, Standings } from '../../store/action/action';
+import { League, LeagueBySession, News, Standings } from '../../store/action/action';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../../components/Loader';
 
@@ -33,11 +33,13 @@ const Explore = ({ navigation }) => {
   const leagues = useSelector((state) => state.root.leagues);
   const standings = useSelector((state) => state.root.standings);
   const loader = useSelector((state) => state.root.loader);
+  const news = useSelector((state) => state.root.news);
 
   useEffect(() => {
     dispatch(League())
     // dispatch(LeagueBySession())
     dispatch(Standings())
+    dispatch(News())
   }, [])
   const categoryButton = (item) => {
     return (
@@ -79,14 +81,13 @@ const Explore = ({ navigation }) => {
         <View style={[styles.container,]}>
           <ScrollView >
             {activeCategory == 'All' ?
-              <All navigation={navigation} />
+              <All navigation={navigation} news={news}/>
               :
               (activeCategory == 'Preview' || activeCategory == 'Highlight') ?
                 <Preview navigation={navigation} leagues={leagues} />
                 :
                 (activeCategory == 'News Update') ?
-                  <NewsUpdate navigation={navigation} />
-
+                  <NewsUpdate navigation={navigation} news={news}/>
                   :
                   (activeCategory == 'Standings') ?
                     <Standing standings={standings} />

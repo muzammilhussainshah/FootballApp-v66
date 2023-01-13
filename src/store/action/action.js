@@ -52,7 +52,7 @@ export const LiveAll = () => {
             dispatch({ type: ActionTypes.LOADER, payload: true });
             let resp = await getResponse(`https://api-football-v1.p.rapidapi.com/v3/fixtures?live=all`)
             if (resp.status == 200) {
-                console.log(resp,'LiveAll')
+                console.log(resp, 'LiveAll')
                 dispatch({ type: ActionTypes.LIVESCORE, payload: resp?.data?.response });
             } else {
                 alert('some thing went wrong')
@@ -70,7 +70,6 @@ export const League = () => {
         try {
             dispatch({ type: ActionTypes.LOADER, payload: true });
             let resp = await getResponse(`https://api-football-v1.p.rapidapi.com/v3/leagues`)
-            console.log(resp, 'respresprespasddsa')
             if (resp.status == 200) dispatch({ type: ActionTypes.LEAGUES, payload: resp?.data?.response.splice(0, 5) });
             else alert('some thing went wrong')
             dispatch({ type: ActionTypes.LOADER, payload: false });
@@ -111,6 +110,22 @@ export const Standings = () => {
         }
     }
 }
+export const News = () => {
+    return async (dispatch) => {
+        try {
+            dispatch({ type: ActionTypes.LOADER, payload: true });
+            let resp = await getResponse(`https://newsapi.org/v2/everything?q=Football&from=${moment(new Date()).format('YYYY-MM-DD')}&sortBy=popularity&apiKey=bc00eaa1853b49269c856e9b63f2b408`)
+            console.log(resp, 'asdasd')
+            if (resp.status == 200) dispatch({ type: ActionTypes.NEWS, payload: resp?.data?.articles.splice(0, 5) });
+            else alert('some thing went wrong')
+
+            dispatch({ type: ActionTypes.LOADER, payload: false });
+        }
+        catch (err) {
+            dispatch({ type: ActionTypes.LOADER, payload: false });
+        }
+    }
+}
 const getResponse = async (URL) => {
     try {
         const option = {
@@ -122,10 +137,9 @@ const getResponse = async (URL) => {
             },
         };
         var resp = await axios(option);
-        console.log(resp,'errerrerrerr')
         return resp
     }
     catch (err) {
-        console.log(err,'errerrerrerr')
+        console.log(err, 'errerrerrerr')
     }
 }

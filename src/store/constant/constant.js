@@ -5,7 +5,7 @@ const ActionTypes = {
      LEAGUES: 'LEAGUES', 
      STANDINGS: 'STANDINGS', 
      LOADER: 'LOADER', 
-     // THISWEEK: 'THISWEEK', 
+     NEWS: 'NEWS', 
 }
 
 export default ActionTypes;

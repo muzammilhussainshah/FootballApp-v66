@@ -7,6 +7,7 @@ const INITIAL_STATE = {
     leagues: [],
     standings: [],
     loader: false,
+    news: [],
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -40,6 +41,11 @@ export default (state = INITIAL_STATE, action) => {
             return ({
                 ...state,
                 loader: action.payload
+            })
+        case ActionTypes.NEWS:
+            return ({
+                ...state,
+                news: action.payload
             })
         default:
             return state;

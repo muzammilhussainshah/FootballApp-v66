@@ -21,11 +21,12 @@ const ExploreCart = ({ item }) => {
     <>
       <View style={styles.trendNewsProfileContainer}>
         <Image
-          source={{ uri: item?.item?.profilePhoto }}
-          style={styles.trendNewsProfile} />
+          source={{ uri: item?.item?.urlToImage }}
+          style={styles.trendNewsProfile}
+          resizeMode='cover' />
       </View>
       <View style={styles.trendNewsBody}>
-        <View style={{ width: '100%', }}>
+        <View style={{ width: '100%' }}>
           <Text style={styles.carouselFooterText}>{item?.item?.title}</Text>
         </View>
         <View style={styles.TrendingNewsCardFooterContainer}>
@@ -35,7 +36,7 @@ const ExploreCart = ({ item }) => {
               size={RFPercentage(2)}
               color={SCColors.tabInactive} />
           </TouchableOpacity>
-          <Text style={[styles.VSText, styles.trendNewsFooterText2]}>{item?.item?.likes}</Text>
+          <Text style={[styles.VSText, styles.trendNewsFooterText2]}>{10}</Text>
           <TouchableOpacity>
             <Octicons
               name='comment'
@@ -43,8 +44,8 @@ const ExploreCart = ({ item }) => {
               style={styles.trendNewsFooterText}
               color={SCColors.tabInactive} />
           </TouchableOpacity>
-          <Text style={[styles.VSText, styles.trendNewsFooterText2]}>{item?.item?.comments}</Text>
-          <Text style={[styles.VSText, styles.trendNewsFooterText]}>{moment(item?.item?.timeStamp).calendar()}</Text>
+          <Text style={[styles.VSText, styles.trendNewsFooterText2]}>{2}</Text>
+          <Text style={[styles.VSText, styles.trendNewsFooterText]}>{moment(item?.item?.publishedAt).calendar()}</Text>
         </View>
       </View>
     </>

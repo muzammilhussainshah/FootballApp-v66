@@ -22,7 +22,7 @@ import {
     NEWSDATA
 } from '../DummyData';
 
-export const All = ({ navigation }) => {
+export const All = ({ navigation ,news}) => {
     return (
         <>
             {/* BANNERS */}
@@ -45,7 +45,7 @@ export const All = ({ navigation }) => {
             {/* TRENDING NEWS */}
             <TitleBar title={`Trending News`} seeAllEnable={true} />
             <FlatList
-                data={NEWSDATA}
+                data={news}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{ padding: RFPercentage(2) }}
                 renderItem={(props) => <TrendingNewsCard
@@ -91,7 +91,7 @@ export const Preview = ({ navigation, leagues }) => {
         {/* MATCH HIGHLIGHT                  : */}
     </>)
 }
-export const MatchPreviewCarousel = ({ footer, footerText, navigateTo, data,league, preview }) => {
+export const MatchPreviewCarousel = ({ footer, footerText, navigateTo, data,news, league, preview }) => {
     return (
         <FlatList
             horizontal
@@ -105,6 +105,7 @@ export const MatchPreviewCarousel = ({ footer, footerText, navigateTo, data,leag
                         index={index}
                         preview={preview}
                         league={league}
+                        news={news}
                         navigateTo={() => navigateTo && navigateTo()}
                         footer={footer == true ? true : false}
                         footerText={footerText} item={item} />)
@@ -114,20 +115,23 @@ export const MatchPreviewCarousel = ({ footer, footerText, navigateTo, data,leag
     )
 }
 
-export const NewsUpdate = ({ navigation }) => {
+export const NewsUpdate = ({ navigation, news }) => {
+    console.log(news,'newsnewsnews')
     return (
         <>
             {/* BANNERS */}
             < View style={styles.bannerContainer}>
                 <MatchPreviewCarousel
                     footer={true}
+                    news={true}
+                    data={news}
                     footerText={`Player, Manager & Goal of the Month Premier League Awards?`} />
             </View>
             {/* BANNERS */}
             {/* TRENDING NEWS */}
             <TitleBar title={`Trending News`} seeAllEnable={true} />
             <FlatList
-                data={NEWSDATA}
+                data={news}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{ padding: RFPercentage(2) }}
                 renderItem={(props) => <TrendingNewsCard

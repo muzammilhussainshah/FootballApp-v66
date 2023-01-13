@@ -157,7 +157,8 @@ export const styles = StyleSheet.create({
   carouselFooterText: {
     color: SCColors.white,
     width: '90%',
-    fontSize: RFPercentage(1.8)
+    fontSize: RFPercentage(1.8),
+
   },
   newsCartContainer: (topCurve, bottomCurve,) => ({
     height: RFPercentage(12),
@@ -190,10 +191,11 @@ export const styles = StyleSheet.create({
   trendNewsProfile: {
     height: '85%',
     width: '85%',
-    borderRadius: RFPercentage(2)
+    borderRadius: RFPercentage(2),
+    backgroundColor:'red'
   },
   trendNewsFooterText: {
-    marginLeft: RFPercentage(2),
+    marginLeft: RFPercentage(1),
     color: SCColors.tabInactive
   },
   trendNewsFooterText2: {

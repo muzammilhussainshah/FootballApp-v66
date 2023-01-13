@@ -13,18 +13,24 @@ import SCColors from '../styles/SCColors';
 // @components
 import { styles } from './styles'
 
-const CustomCarousel = ({ item, index, thisWeek, footer, footerText, navigateTo, league, preview }) => {
+const CustomCarousel = ({ item, index, thisWeek, footer, footerText, news, navigateTo, league, preview }) => {
   // const { item, footer, footerText, navigateTo } = props
+  console.log(item, index, thisWeek, footer, footerText, news, navigateTo, league, preview, 'laskdjsdjakladjsk')
   return (
     <>
       <TouchableOpacity
         onPress={() => navigateTo && navigateTo()}
         activeOpacity={.8}
-        style={[styles.carouselContainer(footer ? true : false), { overflow: "hidden", backgroundColor: SCColors.ScoreCart }]}>
-        {preview ?
-          <Image
-            resizeMode='stretch'
-            source={
+        style={[styles.carouselContainer(footer ? true : false), { overflow: "hidden", }]}>
+        {/* {preview ? */}
+        <Image
+          resizeMode='stretch'
+          source={
+
+
+            news ?
+              { uri: item?.urlToImage }
+              :
               preview ?
                 { uri: league?.logo }
                 // index == 1 ?
@@ -51,27 +57,33 @@ const CustomCarousel = ({ item, index, thisWeek, footer, footerText, navigateTo,
 
                 // thisWeek ?
                 //  { uri: item&&item } 
-                require('../assets/download.jpeg')
-              //  :
-              // index % 2 == 1 ?
-              // require('../assets/thisWeekThumbnail2.jpeg')
-              // :
-              // index % 2 == 0 ?
-              // require('../assets/thisWeekThumbnail.jpeg')
-              // :
+                // require('')
+                null
+            // require('../assets/download.jpeg')
+            //  :
+            // index % 2 == 1 ?
+            // require('../assets/thisWeekThumbnail2.jpeg')
+            // :
+            // index % 2 == 0 ?
+            // require('../assets/thisWeekThumbnail.jpeg')
+            // :
 
-              // require('../assets/thisWeekThumbnail2.jpeg') :
+            // require('../assets/thisWeekThumbnail2.jpeg') :
 
-            }
-            style={
-              // styles.subCrousalBaner(footer ? true : false)
+          }
+          style={
+            // styles.subCrousalBaner(footer ? true : false)
 
-              {
-                height: '100%', width: '100%'
-              }}
-          // resizeMode='contain' 
-          />
-          : <></>}
+            {
+              height:
+                news ?
+                  '70%'
+                  : '100%', width: '100%',
+              backgroundColor: SCColors.ScoreCart
+            }}
+        // resizeMode='contain' 
+        />
+        {/* : <></>} */}
         {thisWeek &&
           <>
             <View style={styles.matchTitleContainer('15%')}>
@@ -87,7 +99,7 @@ const CustomCarousel = ({ item, index, thisWeek, footer, footerText, navigateTo,
         }
         {footer &&
           <View style={styles.carouselFooterContainer}>
-            <Text style={styles.carouselFooterText}>{footerText}</Text>
+            <Text style={styles.carouselFooterText}>{news ? item?.title : footerText}</Text>
           </View>}
 
       </TouchableOpacity>
