@@ -232,5 +232,4 @@ export const tagsStyles = {
         lineHeight: RFPercentage(2.5),
         fontSize: RFPercentage(1.8)
     },
-
 };

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { StyleSheet } from 'react-native';
 
 import Octicons from 'react-native-vector-icons/Octicons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import Entypo from 'react-native-vector-icons/Entypo'
+
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { RFPercentage } from 'react-native-responsive-fontsize';
 
@@ -34,8 +34,8 @@ export default class BottomTabNavigator extends Component {
             tabStyle: {
               backgroundColor: "rgb(45,45,45)",
               paddingVertical: RFPercentage(0.5),
-              paddingBottom: Platform.OS   == 'ios' ? RFPercentage(4.0) : RFPercentage(0.5),
-              height: Platform.OS   == 'ios' ? RFPercentage(10):RFPercentage(10),
+              paddingBottom: Platform.OS == 'ios' ? RFPercentage(4.0) : RFPercentage(0.5),
+              height: Platform.OS == 'ios' ? RFPercentage(10) : RFPercentage(10),
             }
           }}
 
@@ -107,82 +107,3 @@ export default class BottomTabNavigator extends Component {
 
 }
 
-// const MyProfileScreenStack = createStackNavigator();
-// function MyProfileScreenNavigator() {
-//   return (
-//     <MyProfileScreenStack.Navigator>
-//       <MyProfileScreenStack.Screen
-//         name="My Profile"
-//         component={MyProfile}
-//         options={{ headerShown: false }}
-//       />
-//       <MyProfileScreenStack.Screen
-//       name="Settings"
-//       component={Settings}
-//       options={{headerShown: false}}/>
-
-//     </MyProfileScreenStack.Navigator>
-//   );
-// }
-
-// const SkiResortsScreenStack = createStackNavigator();
-// function SkiResortsScreenNavigator() {
-//   return (
-//     <SkiResortsScreenStack.Navigator>
-//       <SkiResortsScreenStack.Screen
-//         name="Ski resorts"
-//         component={SkiResorts}
-//         options={{ headerShown: false }}
-//       />
-//       <SkiResortsScreenStack.Screen
-//       name="LiveSession"
-//       component={LiveSession}
-//       options={{headerShown: false}}/>
-//     </SkiResortsScreenStack.Navigator>
-//   );
-// }
-
-// const ChumsScreenStack = createStackNavigator();
-// function ChumsScreenNavigator() {
-//   return (
-//     <ChumsScreenStack.Navigator>
-//       <ChumsScreenStack.Screen
-//         name="Chums"
-//         component={Chums}
-//         options={{ headerShown: false }}
-//       />
-//       <ChumsScreenStack.Screen
-//         name='Chatlist'
-//         component={Chatlist}
-//         options={{headerShown: false}}
-//       />
-//       <ChumsScreenStack.Screen
-//         name='NewChatGroup'
-//         component={NewChatGroup}
-//         options={{headerShown: false}}
-//       />
-//       <ChumsScreenStack.Screen
-//         name='ChatScreen'
-//         component={ChatScreen}
-//         options={{headerShown: false}}
-//       />
-//     </ChumsScreenStack.Navigator>
-//   );
-// }
-
-// const AddScreenComponent = () => {
-//   return null;
-// }
-
-const style = StyleSheet.create({
-  shadow: {
-    shadowColor: 'red',
-    shadowOffset: {
-      width: 0,
-      height: 10
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 3.5,
-    elevation: 5,
-  }
-});

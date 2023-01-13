@@ -1,11 +1,7 @@
 // @app
 import moment from 'moment';
-import React, {
-    useState
-} from 'react';
+import React from 'react';
 import {
-    Dimensions,
-    FlatList,
     ScrollView,
     Text,
     TextInput,
@@ -17,13 +13,14 @@ import {
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Octicons from 'react-native-vector-icons/Octicons'
-import { RFPercentage } from 'react-native-responsive-fontsize';
 import RenderHtml from 'react-native-render-html';
-
+import { RFPercentage } from 'react-native-responsive-fontsize';
 
 import SCColors from '../../../styles/SCColors';
-import { styles, tagsStyles } from '../../VideoScreen/styles';
-import { TRENDINGNEWSDATA } from '../DummyData';
+import {
+    styles,
+    tagsStyles
+} from '../../VideoScreen/styles';
 import {
     VIDEOSECTION,
     VideoTitle
@@ -32,11 +29,13 @@ import {
 const TrendingNews = ({ navigation, route }) => {
     const [text, onChangeText] = React.useState("Comment here");
     const { data } = route.params
-    console.log(data, 'datadatadata')
+
     const { width } = useWindowDimensions();
+
     const source = {
         html: data.description
     };
+
     return (<>
         <View style={{ flex: 1, backgroundColor: SCColors.primary, }}>
             <ScrollView contentContainerStyle={{ backgroundColor: SCColors.primary, }}>
@@ -84,12 +83,12 @@ const TrendingNews = ({ navigation, route }) => {
                     </View>
                     {/* VIDEO TABS */}
                     <View style={{ flex: 7, }}>
-                            <RenderHtml
-                                contentWidth={width}
-                                source={source}
-                                    tagsStyles={tagsStyles}
+                        <RenderHtml
+                            contentWidth={width}
+                            source={source}
+                            tagsStyles={tagsStyles}
 
-                            /> 
+                        />
                     </View>
                 </View>
             </ScrollView>

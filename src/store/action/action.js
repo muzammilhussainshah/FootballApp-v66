@@ -33,11 +33,8 @@ export const ThisWeek = () => {
             var date = new Date();
             date.setDate(date.getDate() + 7);
             let resp = await getResponse(`https://api-football-v1.p.rapidapi.com/v3/fixtures?from=${moment(new Date()).format('YYYY-MM-DD')}&to=${moment(date).format('YYYY-MM-DD')}&season=2022&league=325`)
-            if (resp.status == 200) {
-                dispatch({ type: ActionTypes.THISWEEK, payload: resp?.data?.response });
-            } else {
-                alert('some thing went wrong')
-            }
+            if (resp.status == 200) dispatch({ type: ActionTypes.THISWEEK, payload: resp?.data?.response });
+            else alert('some thing went wrong')
             dispatch({ type: ActionTypes.LOADER, payload: false });
         }
         catch (err) {
@@ -64,7 +61,7 @@ export const LiveAll = () => {
         }
     }
 }
-//Preview
+
 export const League = () => {
     return async (dispatch) => {
         try {
@@ -79,21 +76,6 @@ export const League = () => {
         }
     }
 }
-// export const LeagueBySession = () => {
-//     return async (dispatch) => {
-//         try {
-//             dispatch({ type: ActionTypes.LOADER, payload: true });
-//             let resp = await getResponse(`https://api-football-v1.p.rapidapi.com/v3/leagues?season=2022`)
-//             console.log(resp, 'respresprsdadasadespasddsa')
-//             // if (resp.status == 200) dispatch({ type: ActionTypes.LEAGUES, payload: resp?.data?.response.splice(0, 5) });
-//             // else alert('some thing went wrong')
-//             // dispatch({ type: ActionTypes.LOADER, payload: false });
-//         }
-//         catch (err) {
-//             dispatch({ type: ActionTypes.LOADER, payload: false });
-//         }
-//     }
-// }
 
 export const Standings = () => {
     return async (dispatch) => {
@@ -102,7 +84,6 @@ export const Standings = () => {
             let resp = await getResponse(`https://api-football-v1.p.rapidapi.com/v3/standings?season=2022&league=39`)
             if (resp.status == 200) dispatch({ type: ActionTypes.STANDINGS, payload: resp?.data?.response });
             else alert('some thing went wrong')
-
             dispatch({ type: ActionTypes.LOADER, payload: false });
         }
         catch (err) {

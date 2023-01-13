@@ -29,21 +29,6 @@ import Loader from '../../components/Loader';
 const windowWidth = Dimensions.get('window').width;
 const flexW1 = windowWidth / 10
 
-export const DUMMYBANNERS = [
-  ''
-  // "https://i.picsum.photos/id/524/700/500.jpg?hmac=PuAKCqRNlpa6_UJLeKABjXH9l3MFgsv-LHMm0bDfey4"
-  ,
-  ''
-  // "https://i.picsum.photos/id/193/700/500.jpg?hmac=q5QJ9ieureq_dXwwsUmh7ub2pN-V1arRrqpMV7czc9g"
-  ,
-  ''
-  // "https://i.picsum.photos/id/971/700/500.jpg?hmac=kNTldtPvd24NEOfvd39iwsRBun4As0dYChiWQuyCFo4"
-  ,
-  ''
-  // "https://i.picsum.photos/id/524/700/500.jpg?hmac=PuAKCqRNlpa6_UJLeKABjXH9l3MFgsv-LHMm0bDfey4"
-  ,
-];
-
 const Home = ({ navigation }) => {
 
   const carouselRef = useRef(null);
@@ -92,12 +77,21 @@ const Home = ({ navigation }) => {
                         ]}>
                           {
                             index % 2 == 1 ?
-                              <Image resizeMode='stretch' source={require('../../assets/bannerImg.jpeg')} style={{ height: "100%", width: "100%", marginLeft: '80%' }} />
+                              <Image
+                                resizeMode='cover'
+                                source={{ uri: 'https://imageio.forbes.com/specials-images/imageserve/5f5be112e7f395dc08ef8e58/Lionel-Messi-celebrating-scoring-a-goal-in-the-2019-20-UEFA-Champions-League/1960x0.jpg?format=jpg&width=960' }}
+                                style={{ height: "100%", width: "100%", marginLeft: '60%' }} />
                               :
                               index % 2 == 0 ?
-                                <Image resizeMode='stretch' source={require('../../assets/bannerImg2.jpeg')} style={{ height: "100%", width: "100%", marginLeft: '80%' }} />
+                                <Image
+                                  resizeMode='cover'
+                                  source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjso8tbwnHE_BbtjJ1BRHDzy7KXsviTlUr5yCa5lKfQU38PpYzCuGM0BQrxBwKVtQ3eV8&usqp=CAU' }}
+                                  style={{ height: "100%", width: "100%", marginLeft: '60%' }} />
                                 :
-                                <Image resizeMode='stretch' source={require('../../assets/bannerImg3.jpeg')} style={{ height: "100%", width: "100%", marginLeft: '80%' }} />
+                                <Image
+                                  resizeMode='cover'
+                                  source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoFT5Iv9fXv-Yvl9IHUFIWv4lIblQHtgz9Cw&usqp=CAU' }}
+                                  style={{ height: "100%", width: "100%", marginLeft: '60%' }} />
                           }
                         </View>
 
@@ -107,11 +101,17 @@ const Home = ({ navigation }) => {
                         ]}>
                           {
                             index % 2 == 1 ?
-                              <Image resizeMode='stretch' source={require('../../assets/bannerImg3.jpeg')} style={{ height: "100%", width: "70%", }} /> :
+                              <Image resizeMode='cover'
+                                source={{ uri: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6JivMJTZ2jJJwFn-iWHrGHKsMxxJCVGltHzdMu1VsOXM5oZOH1OQhxo4cJ41dUARDVm8&usqp=CAU` }}
+                                style={{ height: "100%", width: "70%", }} /> :
                               index % 2 == 0 ?
-                                <Image resizeMode='stretch' source={require('../../assets/bannerImg3.jpeg')} style={{ height: "100%", width: "70%", }} />
+                                <Image resizeMode='cover'
+                                  source={{ uri: `https://static.toiimg.com/thumb/msid-96137993,width-1070,height-580,imgsize-56006,resizemode-75,overlay-toi_sw,pt-32,y_pad-40/photo.jpg` }}
+                                  style={{ height: "100%", width: "70%", }} />
                                 :
-                                <Image resizeMode='stretch' source={require('../../assets/bannerImg.jpeg')} style={{ height: "100%", width: "70%", }} />
+                                <Image resizeMode='cover'
+                                  source={{ uri: "https://cdn.vox-cdn.com/thumbor/AdmJfVko83sIseDKzQxydcb_jm4=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/11541539/974400700.jpg.jpg" }}
+                                  style={{ height: "100%", width: "70%", }} />
                           }
                         </View>
                         <Text style={[styles.homeName('40%', 'flex-end', SCColors.gradientRight, '5%'), {
@@ -174,7 +174,6 @@ const Home = ({ navigation }) => {
                         <>
                           <ScoreCard
                             isLive={true}
-
                             team1Logo={
                               <Image
                                 source={{ uri: item.teams.home.logo }}
@@ -210,22 +209,6 @@ const Home = ({ navigation }) => {
               </View>
             </>
 
-            {/* LIVE SCORES */}
-
-            {/* MATCH HIGHLIGHT */}
-            {/* <TitleBar title={`Match Highlight`} seeAllEnable={true} />
-
-            <View style={{ height: RFPercentage(26) }}>
-              <MatchPreviewCarousel data={DUMMYBANNERS} navigateTo={() => navigation?.navigate('VideoScreen')} />
-            </View> */}
-            {/* MATCH HIGHLIGHT */}
-
-            {/* MATCH PREVIEW */}
-            {/* <TitleBar title={`Match Preview`} seeAllEnable={true} />
-            <View style={{ height: RFPercentage(28) }}>
-              <MatchPreviewCarousel data={DUMMYBANNERS} />
-            </View> */}
-            {/* MATCH PREVIEW */}
 
           </ScrollView>
         </View >

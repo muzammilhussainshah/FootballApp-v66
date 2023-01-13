@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center"
   },
   subCrousalContainer: {
-    backgroundColor: 'red', margin: 1,
+    margin: 1,
     height: RFPercentage(23),
     marginVertical: RFPercentage(2.5),
     alignItems: 'flex-start',
@@ -63,7 +63,6 @@ export const styles = StyleSheet.create({
   },
   leftBannerContainer: {
     width: '100%',
-    backgroundColor: 'green',
     justifyContent: "center",
     alignItems: "center"
   }
