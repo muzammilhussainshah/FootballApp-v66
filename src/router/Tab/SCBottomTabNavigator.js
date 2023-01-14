@@ -54,7 +54,7 @@ export default class BottomTabNavigator extends Component {
           }}
         />
         <BottomTab.Screen
-          name="Explore"
+          name="Leagues"
           component={Explore}
           options={{
             tabBarIcon: ({ color, size }) => (
@@ -65,7 +65,7 @@ export default class BottomTabNavigator extends Component {
           }}
         />
         <BottomTab.Screen
-          name="Live"
+          name="News"
           component={Live}
           options={{
             tabBarIcon: ({ color, size }) => (

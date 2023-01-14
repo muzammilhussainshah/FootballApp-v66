@@ -39,7 +39,6 @@ import {
 
 const Explore = ({ navigation }) => {
   const [activeCategory, setActiveCategory] = useState('All')
-
   const dispatch = useDispatch()
 
   const leagues = useSelector((state) => state.root.leagues);
