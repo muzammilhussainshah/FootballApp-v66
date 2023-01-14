@@ -21,6 +21,8 @@ const ScoreCard = ({ team1Logo,
   leagueIcon
 }) => {
   return (
+    <View style={{flex:1,}}>
+
     <View style={styles.liveScroreContainer}>
       <View style={styles.ScoreHeaderContainer}>
         {leagueIcon}
@@ -42,6 +44,7 @@ const ScoreCard = ({ team1Logo,
         <Text style={styles.MinsText}>{matchDuration}</Text>
         <Text style={styles.GoalText}>{team2Score}</Text>
       </View>
+    </View>
     </View>
   );
 };

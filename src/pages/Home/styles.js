@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
   },
   liveScroreMainContainer: {
     margin: RFPercentage(2),
-    height: RFPercentage(25),
+    // height: RFPercentage(25),
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'

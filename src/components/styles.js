@@ -63,7 +63,8 @@ export const styles = StyleSheet.create({
   liveScroreContainer: {
     height: RFPercentage(25),
     width: flexW1 * 4.4,
-    marginRight: RFPercentage(1.5),
+    marginTop: RFPercentage(1.5),
+    marginLeft: RFPercentage(.4),
     borderRadius: RFPercentage(2), overflow: 'hidden',
     backgroundColor: SCColors.tabInactive
   },
