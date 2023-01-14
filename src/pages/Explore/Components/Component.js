@@ -40,8 +40,8 @@ export const Preview = ({ navigation, leagues }) => {
         {leagues.map((item) => {
             return (
                 <>
-                    < TitleBar title={item.league.name} seeAllEnable={true} />
-                    <MatchPreviewCarouselWithContainer preview data={item.seasons} league={item.league} navigation={navigation} />
+                    < TitleBar title={item[0].league.name} seeAllEnable={true} />
+                    <MatchPreviewCarouselWithContainer preview data={item} league={item} navigation={navigation} />
                 </>
             )
         })}
@@ -67,7 +67,7 @@ export const MatchPreviewCarousel = ({ footer, footerText, navigateTo, data, new
                     <CustomCarousel
                         index={index}
                         preview={preview}
-                        league={league}
+                        league={league?league[index].league:league}
                         news={news}
                         navigateTo={() => navigateTo && navigateTo()}
                         footer={footer == true ? true : false}

@@ -67,7 +67,22 @@ export const League = () => {
         try {
             dispatch({ type: ActionTypes.LOADER, payload: true });
             let resp = await getResponse(`https://api-football-v1.p.rapidapi.com/v3/leagues`)
-            if (resp.status == 200) dispatch({ type: ActionTypes.LEAGUES, payload: resp?.data?.response.splice(0, 5) });
+            let allLeagues = resp?.data?.response;
+            console.log(allLeagues, 'resp from League')
+
+            const Premier = allLeagues.filter(item => item.league.name.indexOf('Premier League') !== -1);
+            const SerieA = allLeagues.filter(item => item.league.name.indexOf('Serie A') !== -1);
+            const Bundesliga = allLeagues.filter(item => item.league.name.indexOf('Bundesliga') !== -1);
+            const Ligue1 = allLeagues.filter(item => item.league.name.indexOf('Ligue 1') !== -1);
+            const Euro = allLeagues.filter(item => item.league.name.indexOf('Euro Championship') !== -1);
+            
+            var famousLeagues = [Premier,SerieA,Bundesliga,Ligue1,Euro]
+
+            console.log(famousLeagues,'famousLeaguesfamousLeagues'); // [1, 2, "x", "y"];
+            // console.log(famousLeagues,'famousLeagues')
+
+
+            if (resp.status == 200) dispatch({ type: ActionTypes.LEAGUES, payload: famousLeagues });
             else alert('some thing went wrong')
             dispatch({ type: ActionTypes.LOADER, payload: false });
         }
