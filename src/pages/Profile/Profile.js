@@ -1,6 +1,6 @@
 // @app
 import React from 'react';
-import { Text, Share, TouchableOpacity, View } from 'react-native';
+import { Text, Share, TouchableOpacity, View ,Linking} from 'react-native';
 import { RFPercentage } from 'react-native-responsive-fontsize';
 // import Share from 'react-native-share';
 
@@ -52,6 +52,18 @@ const Profile = ({ navigation }) => {
       Alert.alert(error.message);
     }
   };
+  
+    const onPrivacy = async () => {
+      const url = 'https://www.privacypolicygenerator.info/live.php?token=9p8Dc49ur2o0jI6khh9RZTCUnT6dntzr'
+      const supported = await Linking.canOpenURL(url); //To check if URL is supported or not.
+      if (supported) {
+      await Linking.openURL(url); // It will open the URL on browser.
+      } else {
+      Alert.alert(`Don't know how to open this URL: ${url}`);
+      }
+      
+  }
+
   const rateUs = () => {
     const options = {
       AppleAppID: "2193813192",
@@ -59,12 +71,13 @@ const Profile = ({ navigation }) => {
       AmazonPackageName: "com.mywebsite.myapp",
       OtherAndroidURL: "http://www.randomappstore.com/app/47172391",
       preferredAndroidMarket: AndroidMarket.Google,
-      preferInApp: false,
+      preferInApp: true,
       openAppStoreIfInAppFails: true,
       fallbackPlatformURL: "http://www.mywebsite.com/myapp.html",
     }
     Rate.rate(options, (success, errorMessage) => {
       if (success) {
+        console.log(success, errorMessage)
         // this technically only tells us if the user successfully went to the Review Page. Whether they actually did anything, we do not know.
         // this.setState({ rated: true })
       }
@@ -101,6 +114,8 @@ const Profile = ({ navigation }) => {
       <CustomButtons
         position={'bottom'}
         title={`Privacy policy`}
+        callBack={onPrivacy}
+
         icon={<MaterialIcons name='privacy-tip'
           color={SCColors.red}
           size={RFPercentage(3)} />}
