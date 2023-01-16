@@ -10,6 +10,7 @@ const SCColors = {
     ScoreCart: "#353535",
     tabActive: "#e7e7e7",
     lightGray: '#3d3d3d',
+    darkGray: '#333333',
     red: "red",
     lightGreen: '#03a600',
     green: '#137511',
