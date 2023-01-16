@@ -14,8 +14,8 @@ const Header = () => {
   return (
     <View style={[styles.headerContainer]}>
       <View style={styles.headerHeading}>
-        <Text style={styles.headerHeadingText1}>Now</Text>
-        <Text style={styles.headerHeadingText2}>TV</Text>
+        <Text style={styles.headerHeadingText1}>Football</Text>
+        {/* <Text style={styles.headerHeadingText2}>TV</Text> */}
       </View>
       <View style={styles.headerHeading}>
         <Ionicons
