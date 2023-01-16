@@ -22,23 +22,19 @@ export default class BottomTabNavigator extends Component {
     return (
       <BottomTab.Navigator
         initialRouteName="My Profile"
-        screenOptions={{
-          headerShown: false,
-
-        }}
-        tabBarOptions={
-          {
-            activeTintColor: SCColors.white,
-            inactiveTintColor: SCColors.tabInactive,
-            showLabel: true,
-            tabStyle: {
+         
+          screenOptions={{
+            tabBarActiveTintColor: SCColors.white,
+            tabBarInactiveTintColor: SCColors.tabInactive,
+            headerShown:false,
+            tabBarStyle: {
               backgroundColor: "rgb(45,45,45)",
-              paddingVertical: RFPercentage(0.5),
-              paddingBottom: Platform.OS == 'ios' ? RFPercentage(4.0) : RFPercentage(0.5),
-              height: Platform.OS == 'ios' ? RFPercentage(10) : RFPercentage(10),
+              paddingVertical: RFPercentage(0.6),
+              paddingBottom: Platform.OS == 'ios' ? RFPercentage(3) : RFPercentage(0.5),
+              height: Platform.OS == 'ios' ? RFPercentage(9.2) : RFPercentage(10),
             }
           }}
-
+         
       >
         <BottomTab.Screen
           name="Home"

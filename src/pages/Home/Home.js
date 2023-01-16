@@ -56,24 +56,19 @@ const Home = ({ navigation }) => {
 
         <Header />
         <View style={[styles.container,]}>
-          <ScrollView >
-          
+          {/* LIVE SCORES */}
+          <>
+            <TitleBar title={`Live Scores`} seeAllEnable={seeAll > 6 ? false : true} seeAllFunc={() => { setseeAll(liveScore.length) }} />
 
+            <View style={styles.liveScroreMainContainer}>
+              {liveScore.length > 0 ?
+                <FlatList
+                  data={liveScore}
+                  // horizontal
+                  numColumns={2}
 
-
-            {/* LIVE SCORES */}
-            <>
-              <TitleBar title={`Live Scores`} seeAllEnable={seeAll>6?false:true} seeAllFunc={()=>{setseeAll(liveScore.length)}} />
-
-              <View style={styles.liveScroreMainContainer}>
-                {liveScore.length > 0 ?
-                  <FlatList
-                    data={liveScore}
-                    // horizontal
-                      numColumns={2}
-
-                    renderItem={({ item,index }) => {
-                      if(index<seeAll)
+                  renderItem={({ item, index }) => {
+                    if (index < seeAll)
                       return (
                         <>
                           <ScoreCard
@@ -104,17 +99,14 @@ const Home = ({ navigation }) => {
 
                         </>
                       )
-                    }}
-                    keyExtractor={item => item.id}
-                  />
-                  :
-                  noDataMsg(`No match this time`)
-                }
-              </View>
-            </>
-
-
-          </ScrollView>
+                  }}
+                  keyExtractor={item => item.id}
+                />
+                :
+                noDataMsg(`No match this time`)
+              }
+            </View>
+          </>
         </View >
       </View>
     </>
