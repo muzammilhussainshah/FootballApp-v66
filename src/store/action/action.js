@@ -99,8 +99,9 @@ export const Standings = (season, league) => {
             dispatch({ type: ActionTypes.LOADER, payload: true });
             let resp = await getResponse(`https://api-football-v1.p.rapidapi.com/v3/standings?season=${season}&league=${league}`)
             let currentStandings = store?.getState()?.root?.standings
-            let alreadyHave = currentStandings.indexOf(resp?.data?.response[0].league.id)
-            if (alreadyHave == -1) currentStandings.push(resp?.data?.response[0].league)
+            let isAvailable = currentStandings.filter((key) => key.id == resp?.data?.response[0].league.id)
+            if (isAvailable.length > 0) { }
+            else { currentStandings.push(resp?.data?.response[0].league) }
             if (resp.status == 200) dispatch({ type: ActionTypes.STANDINGS, payload: currentStandings });
             else alert('some thing went wrong')
             dispatch({ type: ActionTypes.LOADER, payload: false });

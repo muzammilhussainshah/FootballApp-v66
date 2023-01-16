@@ -39,7 +39,7 @@ export const Preview = ({ navigation, leagues }) => {
         {leagues.map((item, index) => {
             return (
                 <View key={index.toString()}>
-                    < TitleBar title={item[0].league.name}  />
+                    < TitleBar title={item[0].league.name} />
                     <MatchPreviewCarouselWithContainer preview data={item} league={item} navigation={navigation} />
                 </ View>
             )
@@ -82,7 +82,7 @@ export const NewsUpdate = ({ navigation, news }) => {
             </View>
             {/* BANNERS */}
             {/* TRENDING NEWS */}
-            <TitleBar title={`Trending News`}   />
+            <TitleBar title={`Trending News`} />
             <FlatList
                 data={news}
                 showsVerticalScrollIndicator={false}
@@ -101,7 +101,7 @@ export const NewsUpdate = ({ navigation, news }) => {
 const ColumnVal = ({ val, rank }) => {
     return (
         <View style={styles.columnValContainer}>
-            <Text style={styles.TeamText}>{rank && rank} {val}</Text>
+            <Text style={[styles.TeamText,]}>{rank && rank} {val}</Text>
         </View>
     )
 }
@@ -163,12 +163,9 @@ export const Standing = ({ standings }) => {
     }
     return (
         <>
-            <TitleBar title={standings[0]?.league?.name} downArrow={<Entypo name={`chevron-thin-down`} size={RFPercentage(2)} color={SCColors.white} />} />
-
-            {/* {LEAGUEROWVAL.map((item, index) => <GoalScorerContainer position={index == 0 ? 'top' : 'mid'} rowVal={item} />)} */}
-
+            <TitleBar title={standings?.name} downArrow={<Entypo name={`chevron-thin-down`} size={RFPercentage(2)} color={SCColors.white} />} />
             <GoalScorerContainer position={'top'} rowVal={headerData} />
-            {standings[0]?.league?.standings[0].map((item, index) => <GoalScorerContainer index={index} position={'mid'} rowVal={item} />)}
+            {standings?.standings[0].map((item, index) => <GoalScorerContainer key={index.toString()} index={index} position={'mid'} rowVal={item} />)}
             <GoalScorerContainer position={'bottom'} rowVal={'See More'} />
 
             <Text style={[styles.TeamText, styles.keyText]}>{`key`}</Text>

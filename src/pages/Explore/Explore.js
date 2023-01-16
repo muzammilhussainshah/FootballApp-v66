@@ -22,7 +22,7 @@ import Loader from '../../components/Loader';
 
 import { styles } from './styles';
 import {
-  Preview,
+  Preview, Standing,
 } from './Components/Component';
 import {
   League,
@@ -34,14 +34,13 @@ import SCColors from '../../styles/SCColors';
 
 const Explore = ({ navigation }) => {
   const [activeCategory, setActiveCategory] = useState('LEAGUES')
-  const [activeLeagueButton, setActiveLeagueButton] = useState('Classement Premier League')
+  const [activeLeagueButton, setActiveLeagueButton] = useState('39')
 
   const dispatch = useDispatch()
 
   const leagues = useSelector((state) => state.root.leagues);
   const loader = useSelector((state) => state.root.loader);
   const standings = useSelector((state) => state.root.standings);
-  console.log(standings, 'standingsstandings')
 
   useEffect(() => {
     dispatch(League())
@@ -70,9 +69,9 @@ const Explore = ({ navigation }) => {
   const leagueButton = (item) => {
     return (
       <TouchableOpacity
-        onPress={() => setActiveLeagueButton(item)}
-        style={styles.caregoryBtnContainer(activeLeagueButton == item ? true : false)}>
-        <Text style={styles.caregoryBtnText(activeLeagueButton == item ? true : false)}>{item}</Text>
+        onPress={() => setActiveLeagueButton(item.id)}
+        style={styles.caregoryBtnContainer(activeLeagueButton == item.id ? true : false)}>
+        <Text style={styles.caregoryBtnText(activeLeagueButton == item.id ? true : false)}>{item?.name}</Text>
       </TouchableOpacity>
     )
   }
@@ -98,7 +97,7 @@ const Explore = ({ navigation }) => {
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{ backgroundColor: SCColors.primary, paddingHorizontal: RFPercentage(2) }}
             renderItem={({ item }) => categoryButton(item)}
-            keyExtractor={item => item.id}
+            keyExtractor={(item, index) => index.toString()}
           />
         </View>
         {/* CATEGORY BUTTONS */}
@@ -111,15 +110,19 @@ const Explore = ({ navigation }) => {
               <Preview navigation={navigation} leagues={leagues} />
             </ScrollView>
             :
-            <FlatList
-              data={['Classement Premier League', 'Classement Ligue 1 Uber Eats', 'Classement La Liga', "Championnat d'Espagne", 'Eurosport', 'Tables - Ligue 1 Uber Eats - LFP']}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={{ backgroundColor: SCColors.primary, paddingHorizontal: RFPercentage(2) }}
-              renderItem={({ item }) => leagueButton(item)}
-              keyExtractor={item => item.id}
-            />
-
+            <>
+              <FlatList
+                data={[{ name: 'Classement Premier League', id: 39 }, { name: 'Classement Ligue 1 Uber Eats', id: 186 }, { name: 'Classement La Liga', id: 140 }, { name: "Championnat d'Espagne", id: 415 }, { name: 'Eurosport, and Tables - Ligue 1 Uber Eats - LFP', id: 960 }]}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={{ backgroundColor: SCColors.primary, paddingHorizontal: RFPercentage(2) }}
+                renderItem={({ item }) => leagueButton(item)}
+                keyExtractor={(item, index) => index.toString()}
+              />
+              <ScrollView style={{ marginVertical: RFPercentage(1) }}>
+                <Standing standings={standings.filter((key) => key.id == activeLeagueButton)[0]} />
+              </ScrollView>
+            </>
           }
         </View >
         {/* SELECTED COMPONENT */}
