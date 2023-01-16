@@ -33,7 +33,7 @@ import { RFPercentage } from 'react-native-responsive-fontsize';
 import SCColors from '../../styles/SCColors';
 
 const Explore = ({ navigation }) => {
-  const [activeCategory, setActiveCategory] = useState('LEAGUES')
+  const [activeCategory, setActiveCategory] = useState('STANDINGS')
   const [activeLeagueButton, setActiveLeagueButton] = useState('39')
 
   const dispatch = useDispatch()
@@ -54,7 +54,6 @@ const Explore = ({ navigation }) => {
     dispatch(Standings('2022', '415'))
     //Euro
     dispatch(Standings('2023', '960'))
-
   }, [])
 
   const categoryButton = (item) => {
@@ -92,7 +91,8 @@ const Explore = ({ navigation }) => {
         {/* CATEGORY BUTTONS */}
         <View style={{ height: RFPercentage(6.5) }}>
           <FlatList
-            data={['LEAGUES', 'STANDINGS']}
+            data={[ 'STANDINGS']}
+            // data={['LEAGUES', 'STANDINGS']}
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{ backgroundColor: SCColors.primary, paddingHorizontal: RFPercentage(2) }}
@@ -107,7 +107,7 @@ const Explore = ({ navigation }) => {
 
           {activeCategory == 'LEAGUES' ?
             <ScrollView >
-              <Preview navigation={navigation} leagues={leagues} />
+              {/* <Preview navigation={navigation} leagues={leagues} /> */}
             </ScrollView>
             :
             <>

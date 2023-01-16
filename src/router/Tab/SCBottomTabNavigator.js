@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import Octicons from 'react-native-vector-icons/Octicons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
-import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 import Entypo from 'react-native-vector-icons/Entypo'
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -74,24 +74,24 @@ export default class BottomTabNavigator extends Component {
           }}
         />
         <BottomTab.Screen
-          name="Reward"
+          name="Browser"
           component={Reward}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <Octicons
-                name='gift'
+              <Entypo
+                name='browser'
                 size={RFPercentage(2.5)}
                 color={color} />
             )
           }}
         />
         <BottomTab.Screen
-          name="Profile"
+          name="Setting"
           component={Profile}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <FontAwesome
-                name='user-circle-o'
+              <AntDesign
+                name='setting'
                 size={RFPercentage(3)}
                 color={color} />
             )

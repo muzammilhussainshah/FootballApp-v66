@@ -16,6 +16,8 @@ target 'FootballApp' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'RNRate', :path => '../node_modules/react-native-rate'
+
   target 'FootballAppTests' do
     inherit! :complete
     # Pods for testing
