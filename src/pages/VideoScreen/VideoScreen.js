@@ -57,7 +57,7 @@ const VideoScreen = ({ navigation }) => {
                         showsHorizontalScrollIndicator={false}
                         contentContainerStyle={{ backgroundColor: SCColors.primary, }}
                         renderItem={({ item }) => videoTabs(item)}
-                        keyExtractor={item => item.id}
+                        keyExtractor={(item, index) => index.toString()}
                     />
                 </View>
                 {/* VIDEO TABS */}

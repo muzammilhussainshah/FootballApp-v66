@@ -43,9 +43,9 @@ const Live = ({ navigation }) => {
 
       {/* SELECTED COMPONENT */}
       <View style={[styles.container,]}>
-        <ScrollView >
+        {/* <ScrollView > */}
               <NewsUpdate navigation={navigation} news={news} />
-        </ScrollView>
+        {/* </ScrollView> */}
       </View >
       {/* SELECTED COMPONENT */}
     </View>

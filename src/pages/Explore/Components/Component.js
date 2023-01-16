@@ -37,21 +37,14 @@ export const Preview = ({ navigation, leagues }) => {
     // console.log(leagues, 'leagues leagues leagues leagues ')
     return (<>
         {/* MATCH HIGHLIGHT */}
-        {leagues.map((item) => {
+        {leagues.map((item, index) => {
             return (
-                <>
+                <View key={index.toString()}>
                     < TitleBar title={item[0].league.name} seeAllEnable={true} />
                     <MatchPreviewCarouselWithContainer preview data={item} league={item} navigation={navigation} />
-                </>
+                </ View>
             )
         })}
-        {/* < TitleBar title={`UEFA Champions League`} seeAllEnable={true} />
-        <MatchPreviewCarouselWithContainer navigation={navigation} />
-        < TitleBar title={`UEFA Champions League`} seeAllEnable={true} />
-        <MatchPreviewCarouselWithContainer navigation={navigation} />
-        < TitleBar title={`UEFA Champions League`} seeAllEnable={true} />
-        <MatchPreviewCarouselWithContainer navigation={navigation} /> */}
-        {/* MATCH HIGHLIGHT                  : */}
     </>)
 }
 export const MatchPreviewCarousel = ({ footer, footerText, navigateTo, data, news, league, preview }) => {
@@ -67,19 +60,18 @@ export const MatchPreviewCarousel = ({ footer, footerText, navigateTo, data, new
                     <CustomCarousel
                         index={index}
                         preview={preview}
-                        league={league?league[index].league:league}
+                        league={league ? league[index].league : league}
                         news={news}
                         navigateTo={() => navigateTo && navigateTo()}
                         footer={footer == true ? true : false}
                         footerText={footerText} item={item} />)
             }}
-            keyExtractor={item => item.id}
+            keyExtractor={(item, index) => index.toString()}
         />
     )
 }
 
 export const NewsUpdate = ({ navigation, news }) => {
-    console.log(news, 'newsnewsnews')
     return (
         <>
             {/* BANNERS */}
@@ -101,7 +93,7 @@ export const NewsUpdate = ({ navigation, news }) => {
                     navigateTo={() => navigation.navigate('TrendingNews', { data: props.item })}
                     newDatalength={NEWSDATA.length}
                     item={props} />}
-                keyExtractor={item => item.id}
+                keyExtractor={(item, index) => index.toString()}
             />
             {/* TRENDING NEWS */}
         </>
