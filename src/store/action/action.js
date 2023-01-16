@@ -2,6 +2,7 @@ import ActionTypes from '../constant/constant';
 
 import axios from "axios";
 import moment from "moment/moment";
+import store from '..';
 
 
 export const NowTV = (date) => {
@@ -75,10 +76,10 @@ export const League = () => {
             const Bundesliga = allLeagues.filter(item => item.league.name.indexOf('Bundesliga') !== -1);
             const Ligue1 = allLeagues.filter(item => item.league.name.indexOf('Ligue 1') !== -1);
             const Euro = allLeagues.filter(item => item.league.name.indexOf('Euro Championship') !== -1);
-            
-            var famousLeagues = [Premier,SerieA,Bundesliga,Ligue1,Euro]
 
-            console.log(famousLeagues,'famousLeaguesfamousLeagues'); // [1, 2, "x", "y"];
+            var famousLeagues = [Premier, SerieA, Bundesliga, Ligue1, Euro]
+
+            console.log(famousLeagues, 'famousLeaguesfamousLeagues'); // [1, 2, "x", "y"];
             // console.log(famousLeagues,'famousLeagues')
 
 
@@ -92,12 +93,15 @@ export const League = () => {
     }
 }
 
-export const Standings = () => {
+export const Standings = (season, league) => {
     return async (dispatch) => {
         try {
             dispatch({ type: ActionTypes.LOADER, payload: true });
-            let resp = await getResponse(`https://api-football-v1.p.rapidapi.com/v3/standings?season=2022&league=39`)
-            if (resp.status == 200) dispatch({ type: ActionTypes.STANDINGS, payload: resp?.data?.response });
+            let resp = await getResponse(`https://api-football-v1.p.rapidapi.com/v3/standings?season=${season}&league=${league}`)
+            let currentStandings = store?.getState()?.root?.standings
+            let alreadyHave = currentStandings.indexOf(resp?.data?.response[0].league.id)
+            if (alreadyHave == -1) currentStandings.push(resp?.data?.response[0].league)
+            if (resp.status == 200) dispatch({ type: ActionTypes.STANDINGS, payload: currentStandings });
             else alert('some thing went wrong')
             dispatch({ type: ActionTypes.LOADER, payload: false });
         }
