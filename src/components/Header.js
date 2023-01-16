@@ -15,20 +15,6 @@ const Header = () => {
     <View style={[styles.headerContainer]}>
       <View style={styles.headerHeading}>
         <Text style={styles.headerHeadingText1}>Football</Text>
-        {/* <Text style={styles.headerHeadingText2}>TV</Text> */}
-      </View>
-      <View style={styles.headerHeading}>
-        <Ionicons
-          name='search'
-          size={RFPercentage(2.6)}
-          color={SCColors.white}
-          style={styles.iconsMargin}
-        />
-        <Fontisto
-          name='bell'
-          size={RFPercentage(2.8)}
-          color={SCColors.white}
-        />
       </View>
     </View>
   );

@@ -34,13 +34,12 @@ export const MatchPreviewCarouselWithContainer = ({ navigation, data, preview, l
     )
 }
 export const Preview = ({ navigation, leagues }) => {
-    // console.log(leagues, 'leagues leagues leagues leagues ')
     return (<>
         {/* MATCH HIGHLIGHT */}
         {leagues.map((item, index) => {
             return (
                 <View key={index.toString()}>
-                    < TitleBar title={item[0].league.name} seeAllEnable={true} />
+                    < TitleBar title={item[0].league.name}  />
                     <MatchPreviewCarouselWithContainer preview data={item} league={item} navigation={navigation} />
                 </ View>
             )
@@ -55,7 +54,6 @@ export const MatchPreviewCarousel = ({ footer, footerText, navigateTo, data, new
             contentContainerStyle={{ paddingHorizontal: RFPercentage(2), }}
             data={data ? data : DUMMYBANNERS}
             renderItem={({ item, index }) => {
-                // console.log(item, 'itemitemitem', index)
                 return (
                     <CustomCarousel
                         index={index}
@@ -84,7 +82,7 @@ export const NewsUpdate = ({ navigation, news }) => {
             </View>
             {/* BANNERS */}
             {/* TRENDING NEWS */}
-            <TitleBar title={`Trending News`} seeAllEnable={true} />
+            <TitleBar title={`Trending News`}   />
             <FlatList
                 data={news}
                 showsVerticalScrollIndicator={false}
